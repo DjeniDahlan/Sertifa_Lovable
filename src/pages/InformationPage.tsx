@@ -6,6 +6,7 @@ import { CalendarIcon } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SocialMediaLinks from "@/components/SocialMediaLinks";
+import { toast } from "@/components/ui/use-toast";
 
 interface NewsItem {
   id: number;
@@ -67,6 +68,13 @@ const InformationPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleNotification = () => {
+    toast({
+      title: "Pengumuman",
+      description: "Anda telah berlangganan informasi terbaru dari LSP Sertifa",
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -94,7 +102,12 @@ const InformationPage = () => {
               ))}
             </ul>
             <div className="mt-4 pt-2">
-              <Button variant="outline" size="sm" className="text-sertifa-purple border-sertifa-purple hover:bg-sertifa-purple hover:text-white">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-sertifa-purple border-sertifa-purple hover:bg-sertifa-purple hover:text-white"
+                onClick={handleNotification}
+              >
                 Lihat Semua Pengumuman
               </Button>
             </div>
@@ -168,7 +181,11 @@ const InformationPage = () => {
                   <p className="text-gray-700 mb-4">{item.summary}</p>
                   
                   {item.linkType === "read" && (
-                    <Button variant="outline" className="text-sertifa-purple border-sertifa-purple hover:bg-sertifa-purple hover:text-white">
+                    <Button 
+                      variant="outline" 
+                      className="text-sertifa-purple border-sertifa-purple hover:bg-sertifa-purple hover:text-white"
+                      onClick={handleNotification}
+                    >
                       Baca Selengkapnya
                     </Button>
                   )}
