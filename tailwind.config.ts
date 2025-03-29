@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +25,13 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				sertifa: {
+					purple: '#5d3b91',
+					lightpurple: '#9b87f5',
+					darkpurple: '#3a1f65',
+					light: '#f8f7fc',
+					dark: '#1a1a1a'
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
