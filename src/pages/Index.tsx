@@ -22,30 +22,53 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-sertifa-purple to-sertifa-darkpurple text-white py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Tingkatkan Profesionalitas dengan Sertifikasi Nasional BNSP
-            </h1>
-            <p className="text-lg mb-8">
-              LSP Sertifa adalah lembaga sertifikasi profesi berstandar nasional BNSP di
-              bidang teknologi informasi. Dapatkan sertifikasi yang diakui secara nasional untuk meningkatkan karir Anda.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-sertifa-purple hover:bg-gray-100"
-              >
-                <Link to="/skema">Lihat Skema Sertifikasi</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-sertifa-purple"
-              >
-                <Link to="/pendaftaran">Daftar Sekarang</Link>
-              </Button>
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 max-w-3xl mb-8 md:mb-0 md:pr-8">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Tingkatkan Profesionalitas dengan Sertifikasi Nasional BNSP
+              </h1>
+              <p className="text-lg mb-8">
+                LSP Sertifa adalah lembaga sertifikasi profesi berstandar nasional BNSP di
+                bidang teknologi informasi. Dapatkan sertifikasi yang diakui secara nasional untuk meningkatkan karir Anda.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-white text-sertifa-purple hover:bg-gray-100"
+                >
+                  <Link to="/skema">Lihat Skema Sertifikasi</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-sertifa-purple"
+                >
+                  <Link to="/pendaftaran">Daftar Sekarang</Link>
+                </Button>
+              </div>
+            </div>
+            <div className="md:w-1/2">
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                  alt="Sertifikasi Profesional" 
+                  className="rounded-lg shadow-2xl w-full object-cover"
+                  style={{ height: "450px" }}
+                />
+                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-sertifa-purple rounded-full flex items-center justify-center text-white mr-4">
+                      <Award size={24} />
+                    </div>
+                    <div>
+                      <p className="text-gray-800 font-bold">5000+</p>
+                      <p className="text-gray-600 text-sm">Profesional Tersertifikasi</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +92,7 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-sertifa-purple rounded-full flex items-center justify-center text-white mb-4">
@@ -83,7 +106,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-sertifa-purple rounded-full flex items-center justify-center text-white mb-4">
@@ -97,7 +120,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-sertifa-purple rounded-full flex items-center justify-center text-white mb-4">
@@ -111,7 +134,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-sertifa-purple rounded-full flex items-center justify-center text-white mb-4">
@@ -128,49 +151,72 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Benefits Section with Image */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-sertifa-purple">Manfaat Sertifikasi Profesi</h2>
-            <p className="text-gray-600">
-              Sertifikasi profesi memberikan berbagai keuntungan untuk pengembangan karir dan profesionalitas Anda
-              di bidang teknologi informasi.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple mb-4">
-                <Star size={24} />
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="lg:w-1/2">
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                  alt="Manfaat Sertifikasi" 
+                  className="rounded-lg shadow-xl w-full object-cover"
+                  style={{ height: "500px" }}
+                />
+                <div className="absolute -top-6 -left-6 bg-sertifa-purple p-4 rounded-lg shadow-xl text-white">
+                  <p className="font-bold text-xl">Kualitas Terjamin</p>
+                  <p className="text-sm">Standar BNSP</p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Pengakuan Kompetensi</h3>
-              <p className="text-gray-600">
-                Sertifikasi BNSP memberikan bukti formal atas kompetensi yang Anda miliki, diakui secara nasional dan sesuai
-                dengan standar industri terkini.
-              </p>
             </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple mb-4">
-                <Rocket size={24} />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Peningkatan Karir</h3>
-              <p className="text-gray-600">
-                Sertifikasi membantu Anda mendapatkan promosi, kenaikan gaji, dan membuka peluang karir baru yang lebih baik
-                di perusahaan dalam dan luar negeri.
+            
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl font-bold mb-6 text-sertifa-purple">Manfaat Sertifikasi Profesi</h2>
+              <p className="text-gray-600 mb-8">
+                Sertifikasi profesi memberikan berbagai keuntungan untuk pengembangan karir dan profesionalitas Anda
+                di bidang teknologi informasi.
               </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple mb-4">
-                <CheckCircle2 size={24} />
+              
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple mr-4 flex-shrink-0">
+                    <Star size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Pengakuan Kompetensi</h3>
+                    <p className="text-gray-600">
+                      Sertifikasi BNSP memberikan bukti formal atas kompetensi yang Anda miliki, diakui secara nasional dan sesuai
+                      dengan standar industri terkini.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple mr-4 flex-shrink-0">
+                    <Rocket size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Peningkatan Karir</h3>
+                    <p className="text-gray-600">
+                      Sertifikasi membantu Anda mendapatkan promosi, kenaikan gaji, dan membuka peluang karir baru yang lebih baik
+                      di perusahaan dalam dan luar negeri.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple mr-4 flex-shrink-0">
+                    <CheckCircle2 size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Keunggulan Kompetitif</h3>
+                    <p className="text-gray-600">
+                      Memberi Anda keunggulan dibanding kandidat lain saat melamar pekerjaan dan memenuhi persyaratan kualifikasi
+                      untuk proyek-proyek tertentu.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Keunggulan Kompetitif</h3>
-              <p className="text-gray-600">
-                Memberi Anda keunggulan dibanding kandidat lain saat melamar pekerjaan dan memenuhi persyaratan kualifikasi
-                untuk proyek-proyek tertentu.
-              </p>
             </div>
           </div>
         </div>
@@ -189,28 +235,35 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredSchemes.map((scheme) => (
-              <Card key={scheme.id} className="border-none shadow-md hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6">
-                  <div className="flex flex-col h-full">
-                    <div className="mb-4">
-                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                        scheme.type === "okupasi" 
-                          ? "bg-blue-100 text-blue-800" 
-                          : "bg-green-100 text-green-800"
-                      }`}>
-                        {scheme.type === "okupasi" ? "Okupasi" : "Klaster"}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{scheme.title}</h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{scheme.description}</p>
-                    <div className="mt-auto">
-                      <Link 
-                        to={`/skema/${scheme.id}`} 
-                        className="inline-flex items-center text-sertifa-purple hover:text-sertifa-darkpurple"
-                      >
-                        Lihat Detail <ChevronRight size={16} className="ml-1" />
-                      </Link>
-                    </div>
+              <Card key={scheme.id} className="border-none shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
+                <CardContent className="pt-6 pb-6 flex flex-col h-full">
+                  <div className="mb-4">
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                      scheme.type === "okupasi" 
+                        ? "bg-blue-100 text-blue-800" 
+                        : "bg-green-100 text-green-800"
+                    }`}>
+                      {scheme.type === "okupasi" ? "Okupasi" : "Klaster"}
+                    </span>
+                  </div>
+                  
+                  <div className="w-full h-40 mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                    <img 
+                      src={`https://source.unsplash.com/random/600x400/?${scheme.title.toLowerCase().replace(/\s+/g, ',')},computer,technology`} 
+                      alt={scheme.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold mb-2">{scheme.title}</h3>
+                  <p className="text-gray-600 mb-4 flex-grow">{scheme.description}</p>
+                  <div className="mt-auto">
+                    <Link 
+                      to={`/skema/${scheme.id}`} 
+                      className="inline-flex items-center text-sertifa-purple hover:text-sertifa-darkpurple"
+                    >
+                      Lihat Detail <ChevronRight size={16} className="ml-1" />
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -236,11 +289,15 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border-none shadow-md">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex flex-col">
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                    <img 
+                      src="https://randomuser.me/api/portraits/men/32.jpg" 
+                      alt="Ahmad Fauzi" 
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
                     <div>
                       <h4 className="font-semibold">Ahmad Fauzi</h4>
                       <p className="text-sm text-gray-500">IT Manager di Perusahaan Fintech</p>
@@ -253,11 +310,15 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex flex-col">
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                    <img 
+                      src="https://randomuser.me/api/portraits/women/44.jpg" 
+                      alt="Lina Mariani" 
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
                     <div>
                       <h4 className="font-semibold">Lina Mariani</h4>
                       <p className="text-sm text-gray-500">Data Analyst di Perusahaan E-commerce</p>
@@ -270,11 +331,15 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md">
+            <Card className="border-none shadow-md hover:shadow-lg transition-all">
               <CardContent className="pt-6">
                 <div className="flex flex-col">
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                    <img 
+                      src="https://randomuser.me/api/portraits/men/76.jpg" 
+                      alt="Budi Santoso" 
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
                     <div>
                       <h4 className="font-semibold">Budi Santoso</h4>
                       <p className="text-sm text-gray-500">Software Engineer di Startup Teknologi</p>
