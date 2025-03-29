@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { MapPin, Phone, Mail, Clock, MessageSquare, Globe, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Globe, Send } from "lucide-react";
+import SocialMediaLinks from "@/components/SocialMediaLinks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -56,7 +57,7 @@ const ContactPage = () => {
             <h2 className="text-2xl font-bold mb-6 text-sertifa-purple">Informasi Kontak</h2>
             
             <div className="space-y-6">
-              <Card className="border-none shadow-md">
+              <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex">
                     <div className="mr-4">
@@ -66,24 +67,30 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-2">Alamat Kantor</h3>
-                      <p className="text-gray-600 mb-2">
-                        Kantor Pusat:<br />
-                        Jl. Teknologi Informasi No. 123<br />
-                        Jakarta Selatan 12345<br />
-                        Indonesia
-                      </p>
-                      <p className="text-gray-600">
-                        Kantor Cabang:<br />
-                        Jl. Merdeka No. 45<br />
-                        Bandung 40115<br />
-                        Indonesia
-                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <h4 className="font-medium text-sertifa-purple mb-1">Kantor Pusat:</h4>
+                          <p className="text-gray-600">
+                            Jl. Teknologi Informasi No. 123<br />
+                            Jakarta Selatan 12345<br />
+                            Indonesia
+                          </p>
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-sertifa-purple mb-1">Kantor Cabang:</h4>
+                          <p className="text-gray-600">
+                            Jl. Merdeka No. 45<br />
+                            Bandung 40115<br />
+                            Indonesia
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card className="border-none shadow-md">
+              <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex">
                     <div className="mr-4">
@@ -94,10 +101,10 @@ const ContactPage = () => {
                     <div>
                       <h3 className="text-lg font-semibold mb-2">Telepon & Fax</h3>
                       <p className="text-gray-600 mb-1">
-                        Telepon: (021) 1234-5678
+                        Telepon: <a href="tel:+62211234578" className="text-sertifa-purple hover:underline">(021) 1234-5678</a>
                       </p>
                       <p className="text-gray-600 mb-1">
-                        Hotline: 0800-1234-5678 (Bebas Pulsa)
+                        Hotline: <a href="tel:08001234578" className="text-sertifa-purple hover:underline">0800-1234-5678</a> (Bebas Pulsa)
                       </p>
                       <p className="text-gray-600">
                         Fax: (021) 1234-5679
@@ -107,7 +114,7 @@ const ContactPage = () => {
                 </CardContent>
               </Card>
               
-              <Card className="border-none shadow-md">
+              <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex">
                     <div className="mr-4">
@@ -131,7 +138,7 @@ const ContactPage = () => {
                 </CardContent>
               </Card>
               
-              <Card className="border-none shadow-md">
+              <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex">
                     <div className="mr-4">
@@ -155,60 +162,24 @@ const ContactPage = () => {
                 </CardContent>
               </Card>
               
-              <Card className="border-none shadow-md">
+              <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex">
                     <div className="mr-4">
-                      <div className="w-12 h-12 bg-sertifa-purple/10 rounded-full flex items-center justify-center text-sertifa-purple">
-                        <MessageSquare size={24} />
-                      </div>
+                      <SocialMediaLinks />
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-2">Media Sosial</h3>
-                      <div className="grid grid-cols-2 gap-2">
-                        <a href="#" className="text-gray-600 hover:text-sertifa-purple flex items-center">
-                          <span className="inline-block w-6 text-center mr-2">
-                            <i className="fab fa-facebook-f"></i>
-                          </span>
-                          Facebook
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-sertifa-purple flex items-center">
-                          <span className="inline-block w-6 text-center mr-2">
-                            <i className="fab fa-twitter"></i>
-                          </span>
-                          Twitter
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-sertifa-purple flex items-center">
-                          <span className="inline-block w-6 text-center mr-2">
-                            <i className="fab fa-instagram"></i>
-                          </span>
-                          Instagram
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-sertifa-purple flex items-center">
-                          <span className="inline-block w-6 text-center mr-2">
-                            <i className="fab fa-linkedin-in"></i>
-                          </span>
-                          LinkedIn
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-sertifa-purple flex items-center">
-                          <span className="inline-block w-6 text-center mr-2">
-                            <i className="fab fa-youtube"></i>
-                          </span>
-                          YouTube
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-sertifa-purple flex items-center">
-                          <span className="inline-block w-6 text-center mr-2">
-                            <i className="fab fa-whatsapp"></i>
-                          </span>
-                          WhatsApp
-                        </a>
-                      </div>
+                      <p className="text-gray-600">
+                        Klik icon di samping untuk melihat daftar media sosial resmi LSP Sertifa.
+                        Ikuti media sosial kami untuk informasi terbaru seputar sertifikasi.
+                      </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <Card className="border-none shadow-md">
+              <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex">
                     <div className="mr-4">
@@ -231,7 +202,7 @@ const ContactPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-6 text-sertifa-purple">Kirim Pesan</h2>
             
-            <Card className="border-none shadow-lg">
+            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="pt-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -243,6 +214,7 @@ const ContactPage = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
+                      className="border-gray-300 focus:border-sertifa-purple focus:ring-sertifa-purple"
                     />
                   </div>
                   
@@ -255,6 +227,7 @@ const ContactPage = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
+                      className="border-gray-300 focus:border-sertifa-purple focus:ring-sertifa-purple"
                     />
                   </div>
                   
@@ -267,6 +240,7 @@ const ContactPage = () => {
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       required
+                      className="border-gray-300 focus:border-sertifa-purple focus:ring-sertifa-purple"
                     />
                   </div>
                   
@@ -279,6 +253,7 @@ const ContactPage = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       required
+                      className="border-gray-300 focus:border-sertifa-purple focus:ring-sertifa-purple"
                     />
                   </div>
                   
@@ -299,11 +274,12 @@ const ContactPage = () => {
             
             <div className="mt-8">
               <h3 className="text-xl font-semibold mb-4 text-sertifa-purple">Lokasi Kami</h3>
-              <div className="rounded-lg overflow-hidden h-80 bg-gray-200">
-                {/* This would be a Google Maps embed in a real implementation */}
-                <div className="w-full h-full flex items-center justify-center">
-                  <p className="text-gray-500">Peta Lokasi LSP Sertifa</p>
-                </div>
+              <div className="rounded-lg overflow-hidden shadow-md">
+                <img 
+                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                  alt="LSP Sertifa Office Map" 
+                  className="w-full h-80 object-cover"
+                />
               </div>
               <p className="text-sm text-gray-500 mt-2">
                 * Klik pada peta untuk membuka Google Maps
