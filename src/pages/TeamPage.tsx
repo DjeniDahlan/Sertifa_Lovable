@@ -1,8 +1,7 @@
-
 import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LinkedIn, Mail, Phone } from "lucide-react";
+import { Linkedin, Mail, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -320,7 +319,7 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
             <a href={`tel:${member.phone}`} className="hover:text-sertifa-purple">{member.phone}</a>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <LinkedIn size={14} className="text-sertifa-purple" />
+            <Linkedin size={14} className="text-sertifa-purple" />
             <a 
               href={`https://${member.linkedin}`} 
               target="_blank" 
