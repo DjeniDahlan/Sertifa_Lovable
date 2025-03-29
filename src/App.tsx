@@ -1,4 +1,5 @@
 
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,27 +20,29 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/skema" element={<SchemaPage />} />
-          <Route path="/skema/:id" element={<SchemaDetailPage />} />
-          <Route path="/informasi" element={<InformationPage />} />
-          <Route path="/tim" element={<TeamPage />} />
-          <Route path="/galery" element={<GalleryPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/kontak" element={<ContactPage />} />
-          <Route path="/pendaftaran" element={<RegistrationPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/skema" element={<SchemaPage />} />
+            <Route path="/skema/:id" element={<SchemaDetailPage />} />
+            <Route path="/informasi" element={<InformationPage />} />
+            <Route path="/tim" element={<TeamPage />} />
+            <Route path="/galery" element={<GalleryPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/kontak" element={<ContactPage />} />
+            <Route path="/pendaftaran" element={<RegistrationPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 
 export default App;
