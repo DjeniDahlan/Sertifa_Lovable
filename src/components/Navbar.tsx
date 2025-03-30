@@ -2,20 +2,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { 
+  Menu, 
+  X, 
+  Home, 
+  User, 
+  Award, 
+  Info, 
+  Users, 
+  Image, 
+  HelpCircle, 
+  Phone
+} from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Profile", path: "/profile" },
-    { name: "Skema Sertifikasi", path: "/skema" },
-    { name: "Informasi", path: "/informasi" },
-    { name: "Tim dan Asesor", path: "/tim" },
-    { name: "Galery", path: "/galery" },
-    { name: "FAQ", path: "/faq" },
-    { name: "Kontak", path: "/kontak" }
+    { name: "Home", path: "/", icon: <Home size={16} className="mr-1" /> },
+    { name: "Profile", path: "/profile", icon: <User size={16} className="mr-1" /> },
+    { name: "Skema Sertifikasi", path: "/skema", icon: <Award size={16} className="mr-1" /> },
+    { name: "Informasi", path: "/informasi", icon: <Info size={16} className="mr-1" /> },
+    { name: "Tim dan Asesor", path: "/tim", icon: <Users size={16} className="mr-1" /> },
+    { name: "Galery", path: "/galery", icon: <Image size={16} className="mr-1" /> },
+    { name: "FAQ", path: "/faq", icon: <HelpCircle size={16} className="mr-1" /> },
+    { name: "Kontak", path: "/kontak", icon: <Phone size={16} className="mr-1" /> }
   ];
 
   return (
@@ -31,8 +42,9 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-sertifa-purple transition-colors"
+              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-sertifa-purple transition-colors flex items-center"
             >
+              {item.icon}
               {item.name}
             </Link>
           ))}
@@ -61,9 +73,10 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-sertifa-purple transition-colors"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-sertifa-purple transition-colors flex items-center"
                 onClick={() => setIsMenuOpen(false)}
               >
+                {item.icon}
                 {item.name}
               </Link>
             ))}

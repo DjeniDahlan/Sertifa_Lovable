@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, ChevronRight, Filter, Book, Folder } from "lucide-react";
+import { Search, ChevronRight, Filter, Book, Folder, Certificate, BadgeCheck } from "lucide-react";
 import { certificationSchemes, CertificationScheme } from "@/data/certificationSchemes";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -39,6 +39,12 @@ const SchemaPage = () => {
     filterSchemes();
   }, [searchQuery, activeTab]);
 
+  // Generate a deterministic image for each scheme based on its ID
+  const getSchemeImage = (scheme: CertificationScheme) => {
+    const keywords = `certification,${scheme.type},${scheme.title.split(' ')[0].toLowerCase()}`;
+    return `https://source.unsplash.com/featured/600x400/?${keywords}&sig=${scheme.id}`;
+  };
+
   return (
     <>
       <Navbar />
@@ -46,7 +52,10 @@ const SchemaPage = () => {
       <div className="bg-gradient-to-r from-sertifa-purple to-sertifa-darkpurple text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-4">Skema Sertifikasi</h1>
+            <h1 className="text-4xl font-bold mb-4">
+              <Certificate className="inline-block mr-2 mb-1" />
+              Skema Sertifikasi
+            </h1>
             <p className="text-lg mb-6">
               Pilih skema sertifikasi yang sesuai dengan kebutuhan karir dan pengembangan profesional Anda.
               LSP Sertifa menawarkan 15 skema sertifikasi yang diakui secara nasional.
@@ -80,6 +89,7 @@ const SchemaPage = () => {
                 onClick={() => setActiveTab("all")}
                 className={activeTab === "all" ? "bg-sertifa-purple hover:bg-sertifa-darkpurple" : ""}
               >
+                <BadgeCheck size={16} className="mr-2" />
                 Semua Skema
               </Button>
               <Button 
@@ -143,19 +153,29 @@ const SchemaPage = () => {
               <Card key={scheme.id} className="border-none shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1 h-full">
                 <CardContent className="pt-6 pb-6 flex flex-col h-full">
                   <div className="mb-4 flex justify-between items-center">
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                       scheme.type === "okupasi" 
                         ? "bg-blue-100 text-blue-800" 
                         : "bg-green-100 text-green-800"
                     }`}>
-                      {scheme.type === "okupasi" ? "Okupasi" : "Klaster"}
+                      {scheme.type === "okupasi" ? (
+                        <>
+                          <Book size={12} className="mr-1" />
+                          Okupasi
+                        </>
+                      ) : (
+                        <>
+                          <Folder size={12} className="mr-1" />
+                          Klaster
+                        </>
+                      )}
                     </span>
                     <span className="text-sm font-medium text-gray-500">{scheme.duration}</span>
                   </div>
                   
                   <div className="w-full h-40 mb-4 bg-gray-100 rounded-lg overflow-hidden">
                     <img 
-                      src={`https://source.unsplash.com/random/600x400/?${scheme.title.toLowerCase().replace(/\s+/g, ',')},certification,technology`} 
+                      src={getSchemeImage(scheme)} 
                       alt={scheme.title}
                       className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
                     />
