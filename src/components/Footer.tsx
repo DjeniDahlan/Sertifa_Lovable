@@ -1,16 +1,28 @@
 
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { language, t } = useLanguage();
+
   return (
     <footer className="bg-sertifa-purple text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">LSP Sertifa</h3>
+            <div className="flex items-center mb-4">
+              <img 
+                src="/lovable-uploads/412b768d-9b28-448d-a8b7-c416179ae543.png" 
+                alt="LSP Sertifa Logo" 
+                className="h-12 mr-2 bg-white p-1 rounded"
+              />
+            </div>
             <p className="mb-4">
-              Lembaga Sertifikasi Profesi berstandar Nasional BNSP bidang teknologi informasi.
+              {t(
+                "Lembaga Sertifikasi Profesi berstandar Nasional BNSP bidang teknologi informasi.",
+                "Professional Certification Body with National BNSP standard in information technology."
+              )}
             </p>
             <div className="flex items-center space-x-2 mb-2">
               <MapPin size={18} />
@@ -27,22 +39,22 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Link Cepat</h3>
+            <h3 className="text-xl font-bold mb-4">{t("Link Cepat", "Quick Links")}</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="hover:underline">Home</Link></li>
-              <li><Link to="/profile" className="hover:underline">Profile</Link></li>
-              <li><Link to="/skema" className="hover:underline">Skema Sertifikasi</Link></li>
-              <li><Link to="/informasi" className="hover:underline">Informasi</Link></li>
-              <li><Link to="/pendaftaran" className="hover:underline">Pendaftaran</Link></li>
+              <li><Link to="/" className="hover:underline">{t("Home", "Home")}</Link></li>
+              <li><Link to="/profile" className="hover:underline">{t("Profile", "Profile")}</Link></li>
+              <li><Link to="/skema" className="hover:underline">{t("Skema Sertifikasi", "Certification Schemes")}</Link></li>
+              <li><Link to="/informasi" className="hover:underline">{t("Informasi", "Information")}</Link></li>
+              <li><Link to="/pendaftaran" className="hover:underline">{t("Pendaftaran", "Registration")}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Jam Operasional</h3>
-            <p className="mb-2">Senin - Jumat: 08.00 - 16.00</p>
-            <p>Sabtu: 08.00 - 12.00</p>
+            <h3 className="text-xl font-bold mb-4">{t("Jam Operasional", "Operating Hours")}</h3>
+            <p className="mb-2">{t("Senin - Jumat: 08.00 - 16.00", "Monday - Friday: 08.00 - 16.00")}</p>
+            <p>{t("Sabtu: 08.00 - 12.00", "Saturday: 08.00 - 12.00")}</p>
             <div className="mt-4">
-              <h4 className="font-semibold mb-2">Ikuti Kami</h4>
+              <h4 className="font-semibold mb-2">{t("Ikuti Kami", "Follow Us")}</h4>
               <div className="flex space-x-4">
                 <a href="#" className="hover:text-sertifa-lightpurple transition-colors">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -65,7 +77,7 @@ const Footer = () => {
         </div>
         
         <div className="pt-6 border-t border-gray-100 border-opacity-20 text-center">
-          <p>© {new Date().getFullYear()} LSP Sertifa. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} LSP Sertifa. {t("Hak cipta dilindungi.", "All rights reserved.")}</p>
         </div>
       </div>
     </footer>
