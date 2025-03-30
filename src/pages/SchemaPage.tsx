@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, ChevronRight, Filter, Book, Folder, Certificate, BadgeCheck } from "lucide-react";
+import { Search, ChevronRight, Filter, Book, Folder, Award, BadgeCheck } from "lucide-react";
 import { certificationSchemes, CertificationScheme } from "@/data/certificationSchemes";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -53,7 +53,7 @@ const SchemaPage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4">
-              <Certificate className="inline-block mr-2 mb-1" />
+              <Award className="inline-block mr-2 mb-1" />
               Skema Sertifikasi
             </h1>
             <p className="text-lg mb-6">
