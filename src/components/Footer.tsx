@@ -14,7 +14,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center space-x-2 mb-2">
               <MapPin size={18} />
-              <span>Jl. Teknologi Informasi No. 123, Jakarta</span>
+              <span>Jl. A.M. Sangaji No.62 02, Cokrodiningratan, Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55233</span>
             </div>
             <div className="flex items-center space-x-2 mb-2">
               <Phone size={18} />

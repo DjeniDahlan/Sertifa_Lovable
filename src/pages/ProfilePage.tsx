@@ -47,7 +47,7 @@ const ProfilePage = () => {
               <div className="md:w-1/2">
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                    src="/lovable-uploads/ae245acb-ef35-4248-aa1a-93acd8128f7a.png" 
                     alt="Sejarah LSP Sertifa" 
                     className="rounded-lg shadow-lg w-full h-96 object-cover"
                   />
@@ -149,7 +149,7 @@ const ProfilePage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center mb-6">
                 <div className="md:w-1/3">
                   <img 
-                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                    src="/lovable-uploads/5237ea6b-60c9-4c9f-9d97-f89b25bd7bf4.png" 
                     alt="Struktur Organisasi" 
                     className="rounded-lg shadow-md w-full object-cover"
                     style={{ height: "200px" }}
@@ -230,9 +230,9 @@ const ProfilePage = () => {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Kantor Pusat Jakarta</h3>
+                    <h3 className="text-xl font-semibold mb-2">Kantor Pusat Yogyakarta</h3>
                     <p className="text-gray-600">
-                      Jl. Teknologi Informasi No. 123, Jakarta Selatan 12345<br />
+                      Jl. A.M. Sangaji No.62 02, Cokrodiningratan, Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55233<br />
                       Telp: (021) 1234-5678<br />
                       Email: info@lspsertifa.id
                     </p>

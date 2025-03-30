@@ -24,6 +24,13 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 max-w-3xl mb-8 md:mb-0 md:pr-8">
+              <div className="flex items-center mb-6">
+                <img 
+                  src="/lovable-uploads/1ba3c4f7-159e-4f9c-92b5-99f286cdafab.png" 
+                  alt="LSP Sertifa Logo" 
+                  className="h-16 mr-4"
+                />
+              </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Tingkatkan Profesionalitas dengan Sertifikasi Nasional BNSP
               </h1>
