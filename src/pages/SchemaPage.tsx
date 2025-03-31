@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSchemeImage } from "@/utils/schemeImageMapping";
 
 const SchemaPage = () => {
   const { t } = useLanguage();
@@ -40,20 +41,6 @@ const SchemaPage = () => {
     
     filterSchemes();
   }, [searchQuery, activeTab]);
-
-  // Generate a reliable image for each scheme based on its ID
-  const getSchemeImage = (scheme: CertificationScheme) => {
-    // Use a static set of images for reliability
-    const images = [
-      "/lovable-uploads/1ba3c4f7-159e-4f9c-92b5-99f286cdafab.png", // logo
-      "/lovable-uploads/412b768d-9b28-448d-a8b7-c416179ae543.png", // structure
-      "/lovable-uploads/5237ea6b-60c9-4c9f-9d97-f89b25bd7bf4.png", // office
-      "/lovable-uploads/ae245acb-ef35-4248-aa1a-93acd8128f7a.png", // logo
-    ];
-    
-    // Use the scheme ID to select an image from the array
-    return images[scheme.id % images.length];
-  };
 
   return (
     <>
@@ -195,7 +182,7 @@ const SchemaPage = () => {
                   
                   <div className="w-full h-40 mb-4 bg-gray-100 rounded-lg overflow-hidden">
                     <img 
-                      src={getSchemeImage(scheme)} 
+                      src={getSchemeImage(scheme.id)} 
                       alt={scheme.title}
                       className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
                       onError={(e) => {

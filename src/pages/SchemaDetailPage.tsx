@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { certificationSchemes } from "@/data/certificationSchemes";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSchemeImage } from "@/utils/schemeImageMapping";
 
 const SchemaDetailPage = () => {
   const { t } = useLanguage();
@@ -16,17 +18,6 @@ const SchemaDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const getSchemeImage = (id: number) => {
-    const images = [
-      "/lovable-uploads/1ba3c4f7-159e-4f9c-92b5-99f286cdafab.png",
-      "/lovable-uploads/412b768d-9b28-448d-a8b7-c416179ae543.png",
-      "/lovable-uploads/5237ea6b-60c9-4c9f-9d97-f89b25bd7bf4.png",
-      "/lovable-uploads/ae245acb-ef35-4248-aa1a-93acd8128f7a.png",
-    ];
-    
-    return images[id % images.length];
-  };
 
   if (!scheme) {
     return (
