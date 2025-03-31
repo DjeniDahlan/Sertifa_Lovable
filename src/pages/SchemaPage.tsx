@@ -8,8 +8,10 @@ import { certificationSchemes, CertificationScheme } from "@/data/certificationS
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SchemaPage = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"all" | "okupasi" | "klaster">("all");
   const [filteredSchemes, setFilteredSchemes] = useState<CertificationScheme[]>(certificationSchemes);
@@ -39,10 +41,18 @@ const SchemaPage = () => {
     filterSchemes();
   }, [searchQuery, activeTab]);
 
-  // Generate a deterministic image for each scheme based on its ID
+  // Generate a reliable image for each scheme based on its ID
   const getSchemeImage = (scheme: CertificationScheme) => {
-    const keywords = `certification,${scheme.type},${scheme.title.split(' ')[0].toLowerCase()}`;
-    return `https://source.unsplash.com/featured/600x400/?${keywords}&sig=${scheme.id}`;
+    // Use a static set of images for reliability
+    const images = [
+      "/lovable-uploads/1ba3c4f7-159e-4f9c-92b5-99f286cdafab.png", // logo
+      "/lovable-uploads/412b768d-9b28-448d-a8b7-c416179ae543.png", // structure
+      "/lovable-uploads/5237ea6b-60c9-4c9f-9d97-f89b25bd7bf4.png", // office
+      "/lovable-uploads/ae245acb-ef35-4248-aa1a-93acd8128f7a.png", // logo
+    ];
+    
+    // Use the scheme ID to select an image from the array
+    return images[scheme.id % images.length];
   };
 
   return (
@@ -54,11 +64,13 @@ const SchemaPage = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4">
               <Award className="inline-block mr-2 mb-1" />
-              Skema Sertifikasi
+              {t("Skema Sertifikasi", "Certification Schemes")}
             </h1>
             <p className="text-lg mb-6">
-              Pilih skema sertifikasi yang sesuai dengan kebutuhan karir dan pengembangan profesional Anda.
-              LSP Sertifa menawarkan 15 skema sertifikasi yang diakui secara nasional.
+              {t(
+                "Pilih skema sertifikasi yang sesuai dengan kebutuhan karir dan pengembangan profesional Anda. LSP Sertifa menawarkan 15 skema sertifikasi yang diakui secara nasional.",
+                "Choose a certification scheme that suits your career needs and professional development. LSP Sertifa offers 15 nationally recognized certification schemes."
+              )}
             </p>
             <div className="relative max-w-xl mx-auto">
               <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
@@ -66,7 +78,7 @@ const SchemaPage = () => {
               </div>
               <Input
                 type="text"
-                placeholder="Cari skema sertifikasi..."
+                placeholder={t("Cari skema sertifikasi...", "Search certification schemes...")}
                 className="pl-10 py-6 bg-white/90 text-gray-800 rounded-full"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -81,7 +93,7 @@ const SchemaPage = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <div className="flex items-center">
               <Filter size={20} className="text-sertifa-purple mr-2" />
-              <h2 className="text-xl font-semibold">Filter Skema</h2>
+              <h2 className="text-xl font-semibold">{t("Filter Skema", "Filter Schemes")}</h2>
             </div>
             <div className="flex flex-wrap justify-center gap-4">
               <Button 
@@ -90,7 +102,7 @@ const SchemaPage = () => {
                 className={activeTab === "all" ? "bg-sertifa-purple hover:bg-sertifa-darkpurple" : ""}
               >
                 <BadgeCheck size={16} className="mr-2" />
-                Semua Skema
+                {t("Semua Skema", "All Schemes")}
               </Button>
               <Button 
                 variant={activeTab === "okupasi" ? "default" : "outline"}
@@ -98,7 +110,7 @@ const SchemaPage = () => {
                 className={activeTab === "okupasi" ? "bg-sertifa-purple hover:bg-sertifa-darkpurple" : ""}
               >
                 <Book size={16} className="mr-2" />
-                Skema Okupasi
+                {t("Skema Okupasi", "Occupation Schemes")}
               </Button>
               <Button 
                 variant={activeTab === "klaster" ? "default" : "outline"}
@@ -106,7 +118,7 @@ const SchemaPage = () => {
                 className={activeTab === "klaster" ? "bg-sertifa-purple hover:bg-sertifa-darkpurple" : ""}
               >
                 <Folder size={16} className="mr-2" />
-                Skema Klaster
+                {t("Skema Klaster", "Cluster Schemes")}
               </Button>
             </div>
           </div>
@@ -115,17 +127,25 @@ const SchemaPage = () => {
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="mb-4 md:mb-0">
                 <p className="text-gray-600">
-                  Menampilkan <span className="font-semibold text-sertifa-purple">{filteredSchemes.length}</span> dari {certificationSchemes.length} skema sertifikasi
+                  {t(
+                    `Menampilkan `,
+                    `Showing `
+                  )}
+                  <span className="font-semibold text-sertifa-purple">{filteredSchemes.length}</span>
+                  {t(
+                    ` dari ${certificationSchemes.length} skema sertifikasi`,
+                    ` of ${certificationSchemes.length} certification schemes`
+                  )}
                 </p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="flex items-center">
                   <span className="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
-                  <span className="text-sm text-gray-600">Okupasi</span>
+                  <span className="text-sm text-gray-600">{t("Okupasi", "Occupation")}</span>
                 </div>
                 <div className="flex items-center">
                   <span className="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
-                  <span className="text-sm text-gray-600">Klaster</span>
+                  <span className="text-sm text-gray-600">{t("Klaster", "Cluster")}</span>
                 </div>
               </div>
             </div>
@@ -137,14 +157,14 @@ const SchemaPage = () => {
             <div className="mx-auto w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
               <Search size={36} className="text-gray-400" />
             </div>
-            <h3 className="text-xl font-medium text-gray-600 mb-2">Tidak ada skema yang ditemukan</h3>
-            <p className="text-gray-500 mb-4">Coba ubah pencarian atau filter Anda</p>
+            <h3 className="text-xl font-medium text-gray-600 mb-2">{t("Tidak ada skema yang ditemukan", "No schemes found")}</h3>
+            <p className="text-gray-500 mb-4">{t("Coba ubah pencarian atau filter Anda", "Try changing your search or filter")}</p>
             <Button 
               variant="outline"
               onClick={() => {setSearchQuery(""); setActiveTab("all");}}
               className="border-sertifa-purple text-sertifa-purple hover:bg-sertifa-purple hover:text-white"
             >
-              Reset Filter
+              {t("Reset Filter", "Reset Filter")}
             </Button>
           </div>
         ) : (
@@ -161,12 +181,12 @@ const SchemaPage = () => {
                       {scheme.type === "okupasi" ? (
                         <>
                           <Book size={12} className="mr-1" />
-                          Okupasi
+                          {t("Okupasi", "Occupation")}
                         </>
                       ) : (
                         <>
                           <Folder size={12} className="mr-1" />
-                          Klaster
+                          {t("Klaster", "Cluster")}
                         </>
                       )}
                     </span>
@@ -178,6 +198,11 @@ const SchemaPage = () => {
                       src={getSchemeImage(scheme)} 
                       alt={scheme.title}
                       className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                      onError={(e) => {
+                        // Fallback if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/placeholder.svg";
+                      }}
                     />
                   </div>
                   
@@ -190,7 +215,7 @@ const SchemaPage = () => {
                       to={`/skema/${scheme.id}`} 
                       className="inline-flex items-center text-sertifa-purple hover:text-sertifa-darkpurple"
                     >
-                      Lihat Detail <ChevronRight size={16} className="ml-1" />
+                      {t("Lihat Detail", "View Details")} <ChevronRight size={16} className="ml-1" />
                     </Link>
                   </div>
                 </CardContent>
@@ -203,12 +228,12 @@ const SchemaPage = () => {
           <div className="mt-10 flex justify-center">
             <nav aria-label="Pagination" className="inline-flex">
               <Button variant="outline" className="mr-2" disabled>
-                Sebelumnya
+                {t("Sebelumnya", "Previous")}
               </Button>
               <Button className="mr-2 bg-sertifa-purple">1</Button>
               <Button variant="outline" className="mr-2">2</Button>
               <Button variant="outline" className="mr-2">3</Button>
-              <Button variant="outline">Selanjutnya</Button>
+              <Button variant="outline">{t("Selanjutnya", "Next")}</Button>
             </nav>
           </div>
         )}
@@ -220,22 +245,25 @@ const SchemaPage = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/2">
                 <img 
-                  src="https://images.unsplash.com/photo-1551836022-aadb801c60ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                  src="/lovable-uploads/5237ea6b-60c9-4c9f-9d97-f89b25bd7bf4.png" 
                   alt="Sertifikasi" 
                   className="rounded-lg shadow-lg w-full h-72 object-cover"
                 />
               </div>
               <div className="md:w-1/2 text-center md:text-left">
-                <h2 className="text-3xl font-bold mb-4 text-sertifa-purple">Siap Untuk Ambil Sertifikasi?</h2>
+                <h2 className="text-3xl font-bold mb-4 text-sertifa-purple">{t("Siap Untuk Ambil Sertifikasi?", "Ready to Get Certified?")}</h2>
                 <p className="text-lg mb-8 text-gray-600">
-                  Segera daftarkan diri Anda untuk mengikuti sertifikasi dan tingkatkan kompetensi profesional Anda.
+                  {t(
+                    "Segera daftarkan diri Anda untuk mengikuti sertifikasi dan tingkatkan kompetensi profesional Anda.",
+                    "Register yourself now to participate in certification and enhance your professional competence."
+                  )}
                 </p>
                 <Button
                   asChild
                   size="lg"
                   className="bg-sertifa-purple hover:bg-sertifa-darkpurple"
                 >
-                  <Link to="/pendaftaran">Daftar Sekarang</Link>
+                  <Link to="/pendaftaran">{t("Daftar Sekarang", "Register Now")}</Link>
                 </Button>
               </div>
             </div>
