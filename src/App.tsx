@@ -17,6 +17,11 @@ import FAQPage from "./pages/FAQPage";
 import ContactPage from "./pages/ContactPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import NotFound from "./pages/NotFound";
+import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AdminHome from "./components/admin/AdminHome";
+import SchemesManagement from "./components/admin/SchemesManagement";
+import TeamManagement from "./components/admin/TeamManagement";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +44,15 @@ const App = () => (
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/kontak" element={<ContactPage />} />
               <Route path="/pendaftaran" element={<RegistrationPage />} />
+              
+              {/* Admin Routes */}
+              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/admin/dashboard" element={<AdminDashboardPage />}>
+                <Route index element={<AdminHome />} />
+                <Route path="schemes" element={<SchemesManagement />} />
+                <Route path="team" element={<TeamManagement />} />
+              </Route>
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
