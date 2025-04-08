@@ -106,21 +106,35 @@ const InformationManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingItem) {
+      // Fix: ensure all required properties are included when updating
+      const updatedItem: InformationItem = {
+        ...editingItem,
+        title: values.title,
+        category: values.category,
+        content: values.content,
+        publishDate: values.publishDate
+      };
+      
       setItems(items.map(item => 
-        item.id === editingItem.id 
-          ? { ...item, ...values } 
-          : item
+        item.id === editingItem.id ? updatedItem : item
       ));
+      
       toast({
         title: "Informasi berhasil diperbarui",
         description: `${values.title} telah diperbarui`,
       });
     } else {
-      const newItem = {
+      // Fix: ensure all required properties are included when adding
+      const newItem: InformationItem = {
         id: Date.now().toString(),
-        ...values,
+        title: values.title,
+        category: values.category,
+        content: values.content,
+        publishDate: values.publishDate
       };
+      
       setItems([...items, newItem]);
+      
       toast({
         title: "Informasi baru ditambahkan",
         description: `${values.title} telah ditambahkan`,

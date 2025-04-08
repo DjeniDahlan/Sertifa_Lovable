@@ -98,21 +98,33 @@ const FAQManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingItem) {
+      // Fix: ensure all required properties are included when updating
+      const updatedItem: FAQItem = {
+        ...editingItem,
+        question: values.question,
+        answer: values.answer,
+        category: values.category
+      };
+      
       setItems(items.map(item => 
-        item.id === editingItem.id 
-          ? { ...item, ...values } 
-          : item
+        item.id === editingItem.id ? updatedItem : item
       ));
+      
       toast({
         title: "FAQ berhasil diperbarui",
         description: "Pertanyaan dan jawaban telah diperbarui",
       });
     } else {
-      const newItem = {
+      // Fix: ensure all required properties are included when adding
+      const newItem: FAQItem = {
         id: Date.now().toString(),
-        ...values,
+        question: values.question,
+        answer: values.answer,
+        category: values.category
       };
+      
       setItems([...items, newItem]);
+      
       toast({
         title: "FAQ baru ditambahkan",
         description: "Pertanyaan dan jawaban baru telah ditambahkan",

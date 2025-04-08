@@ -105,21 +105,35 @@ const GalleryManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingItem) {
+      // Fix: ensure all required properties are included when updating
+      const updatedItem: GalleryItem = {
+        ...editingItem,
+        title: values.title,
+        imageUrl: values.imageUrl,
+        eventDate: values.eventDate,
+        description: values.description
+      };
+      
       setItems(items.map(item => 
-        item.id === editingItem.id 
-          ? { ...item, ...values } 
-          : item
+        item.id === editingItem.id ? updatedItem : item
       ));
+      
       toast({
         title: "Item galeri berhasil diperbarui",
         description: `${values.title} telah diperbarui`,
       });
     } else {
-      const newItem = {
+      // Fix: ensure all required properties are included when adding
+      const newItem: GalleryItem = {
         id: Date.now().toString(),
-        ...values,
+        title: values.title,
+        imageUrl: values.imageUrl,
+        eventDate: values.eventDate,
+        description: values.description
       };
+      
       setItems([...items, newItem]);
+      
       toast({
         title: "Item galeri baru ditambahkan",
         description: `${values.title} telah ditambahkan`,

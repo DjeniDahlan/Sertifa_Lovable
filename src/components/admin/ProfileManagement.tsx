@@ -99,21 +99,33 @@ const ProfileManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingSection) {
+      // Fix: ensure all required properties are included when updating
+      const updatedSection: ProfileSection = {
+        ...editingSection,
+        title: values.title,
+        subtitle: values.subtitle,
+        content: values.content
+      };
+      
       setSections(sections.map(section => 
-        section.id === editingSection.id 
-          ? { ...section, ...values } 
-          : section
+        section.id === editingSection.id ? updatedSection : section
       ));
+      
       toast({
         title: "Bagian profil berhasil diperbarui",
         description: `${values.title} telah diperbarui`,
       });
     } else {
-      const newSection = {
+      // Fix: ensure all required properties are included when adding
+      const newSection: ProfileSection = {
         id: Date.now().toString(),
-        ...values,
+        title: values.title,
+        subtitle: values.subtitle,
+        content: values.content
       };
+      
       setSections([...sections, newSection]);
+      
       toast({
         title: "Bagian profil baru ditambahkan",
         description: `${values.title} telah ditambahkan`,
