@@ -46,19 +46,85 @@ type FAQItem = {
   category: string;
 };
 
+// Match the structure from the frontend FAQ page
 const initialData: FAQItem[] = [
+  // General Category
   {
     id: "1",
-    question: "Apa itu sertifikasi kompetensi?",
-    answer: "Sertifikasi kompetensi adalah proses pemberian sertifikat kompetensi yang dilakukan secara sistematis dan objektif melalui uji kompetensi yang mengacu pada standar kompetensi kerja.",
-    category: "Umum",
+    question: "Apa itu LSP Sertifa?",
+    answer: "LSP Sertifa adalah Lembaga Sertifikasi Profesi yang telah mendapatkan lisensi dari Badan Nasional Sertifikasi Profesi (BNSP) untuk menyelenggarakan sertifikasi kompetensi kerja di bidang teknologi informasi.",
+    category: "Umum"
   },
   {
     id: "2",
-    question: "Berapa lama masa berlaku sertifikat kompetensi?",
-    answer: "Sertifikat kompetensi yang dikeluarkan oleh LSP berlaku selama 3 tahun dan dapat diperpanjang melalui proses resertifikasi.",
-    category: "Sertifikasi",
+    question: "Apakah sertifikasi dari LSP Sertifa diakui secara nasional?",
+    answer: "Ya, sertifikasi yang dikeluarkan oleh LSP Sertifa telah diakui secara nasional karena merupakan lembaga yang telah mendapatkan lisensi resmi dari BNSP (Badan Nasional Sertifikasi Profesi).",
+    category: "Umum"
   },
+  {
+    id: "3",
+    question: "Berapa lama masa berlaku sertifikat yang diterbitkan?",
+    answer: "Sertifikat kompetensi yang diterbitkan oleh LSP Sertifa berlaku selama 3 tahun. Setelah masa berlaku habis, pemegang sertifikat dapat melakukan re-sertifikasi untuk memperbarui sertifikatnya.",
+    category: "Umum"
+  },
+  {
+    id: "4",
+    question: "Bagaimana cara memeriksa keaslian sertifikat?",
+    answer: "Keaslian sertifikat dapat diperiksa melalui website resmi LSP Sertifa dengan memasukkan nomor registrasi sertifikat pada halaman verifikasi sertifikat. Anda juga dapat menghubungi kantor LSP Sertifa untuk konfirmasi.",
+    category: "Umum"
+  },
+  
+  // Registration Category
+  {
+    id: "5",
+    question: "Bagaimana cara mendaftar sertifikasi di LSP Sertifa?",
+    answer: "Pendaftaran dapat dilakukan secara online melalui website resmi LSP Sertifa atau langsung datang ke kantor LSP Sertifa. Untuk pendaftaran online, Anda perlu mengisi formulir pendaftaran dan mengunggah dokumen yang diperlukan.",
+    category: "Pendaftaran"
+  },
+  {
+    id: "6",
+    question: "Dokumen apa saja yang perlu disiapkan untuk pendaftaran?",
+    answer: "Dokumen yang perlu disiapkan antara lain: KTP, ijazah pendidikan terakhir, CV, pas foto terbaru, bukti pengalaman kerja (jika diperlukan sesuai skema), dan dokumen pendukung lainnya sesuai persyaratan skema sertifikasi.",
+    category: "Pendaftaran"
+  },
+  {
+    id: "7",
+    question: "Berapa biaya untuk mengikuti sertifikasi?",
+    answer: "Biaya sertifikasi bervariasi tergantung pada skema sertifikasi yang dipilih. Informasi lengkap mengenai biaya dapat dilihat pada halaman detail skema sertifikasi di website resmi LSP Sertifa.",
+    category: "Pendaftaran"
+  },
+  {
+    id: "8",
+    question: "Apakah ada program beasiswa atau diskon untuk sertifikasi?",
+    answer: "LSP Sertifa menyediakan program beasiswa dan diskon khusus untuk mahasiswa, fresh graduate, dan kelompok tertentu. Informasi mengenai program ini diumumkan secara berkala melalui website dan media sosial resmi LSP Sertifa.",
+    category: "Pendaftaran"
+  },
+  
+  // Certification Category
+  {
+    id: "9",
+    question: "Apa saja tahapan dalam proses sertifikasi?",
+    answer: "Tahapan sertifikasi meliputi: pendaftaran, asesmen mandiri, verifikasi portofolio, uji kompetensi (tes tertulis, praktik, dan wawancara), dan penerbitan sertifikat bagi peserta yang dinyatakan kompeten.",
+    category: "Sertifikasi"
+  },
+  {
+    id: "10",
+    question: "Berapa lama proses sertifikasi hingga mendapatkan sertifikat?",
+    answer: "Proses sertifikasi dari pendaftaran hingga penerbitan sertifikat biasanya memakan waktu 4-6 minggu, tergantung jadwal asesmen dan kelengkapan dokumen peserta. Hasil uji kompetensi akan diumumkan 7-14 hari setelah asesmen.",
+    category: "Sertifikasi"
+  },
+  {
+    id: "11",
+    question: "Apa yang terjadi jika saya gagal dalam uji kompetensi?",
+    answer: "Jika dinyatakan belum kompeten, peserta dapat mengajukan banding atau mengikuti uji kompetensi ulang sesuai dengan prosedur yang berlaku. Biasanya, peserta diberi kesempatan untuk mengulang unit kompetensi yang belum tercapai.",
+    category: "Sertifikasi"
+  },
+  {
+    id: "12",
+    question: "Apakah ada persiapan khusus sebelum mengikuti uji kompetensi?",
+    answer: "LSP Sertifa menyediakan materi persiapan dan workshop bagi peserta sertifikasi. Kami menyarankan peserta untuk mempelajari materi yang diberikan dan mengikuti workshop persiapan jika tersedia.",
+    category: "Sertifikasi"
+  }
 ];
 
 const FAQManagement = () => {
@@ -98,7 +164,7 @@ const FAQManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingItem) {
-      // Fix: ensure all required properties are included when updating
+      // Ensure all required properties are included when updating
       const updatedItem: FAQItem = {
         ...editingItem,
         question: values.question,
@@ -115,7 +181,7 @@ const FAQManagement = () => {
         description: "Pertanyaan dan jawaban telah diperbarui",
       });
     } else {
-      // Fix: ensure all required properties are included when adding
+      // Ensure all required properties are included when adding
       const newItem: FAQItem = {
         id: Date.now().toString(),
         question: values.question,
@@ -221,7 +287,15 @@ const FAQManagement = () => {
                   <FormItem>
                     <FormLabel>Kategori</FormLabel>
                     <FormControl>
-                      <Input placeholder="Masukkan kategori FAQ" {...field} />
+                      <select
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        {...field}
+                      >
+                        <option value="" disabled>Pilih kategori</option>
+                        <option value="Umum">Umum</option>
+                        <option value="Pendaftaran">Pendaftaran</option>
+                        <option value="Sertifikasi">Sertifikasi</option>
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
