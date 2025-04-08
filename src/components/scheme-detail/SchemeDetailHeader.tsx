@@ -51,7 +51,7 @@ const SchemeDetailHeader = ({ scheme }: SchemeDetailHeaderProps) => {
                   </span>
                 )}
               </Badge>
-              <span className="text-sm ml-3 bg-white/10 px-3 py-1 rounded-full">{scheme.code}</span>
+              {/* Removing the reference to the non-existent 'code' property */}
             </div>
             
             <h1 className="text-3xl font-bold mb-4">{scheme.title}</h1>
