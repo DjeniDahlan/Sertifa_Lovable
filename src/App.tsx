@@ -19,9 +19,17 @@ import RegistrationPage from "./pages/RegistrationPage";
 import NotFound from "./pages/NotFound";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+
+// Admin components
 import AdminHome from "./components/admin/AdminHome";
 import SchemesManagement from "./components/admin/SchemesManagement";
 import TeamManagement from "./components/admin/TeamManagement";
+import ProfileManagement from "./components/admin/ProfileManagement";
+import InformationManagement from "./components/admin/InformationManagement";
+import GalleryManagement from "./components/admin/GalleryManagement";
+import FAQManagement from "./components/admin/FAQManagement";
+import ContactManagement from "./components/admin/ContactManagement";
+import RegistrationManagement from "./components/admin/RegistrationManagement";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +59,12 @@ const App = () => (
                 <Route index element={<AdminHome />} />
                 <Route path="schemes" element={<SchemesManagement />} />
                 <Route path="team" element={<TeamManagement />} />
+                <Route path="profile" element={<ProfileManagement />} />
+                <Route path="information" element={<InformationManagement />} />
+                <Route path="gallery" element={<GalleryManagement />} />
+                <Route path="faq" element={<FAQManagement />} />
+                <Route path="contacts" element={<ContactManagement />} />
+                <Route path="registrations" element={<RegistrationManagement />} />
               </Route>
               
               <Route path="*" element={<NotFound />} />

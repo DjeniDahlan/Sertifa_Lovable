@@ -13,7 +13,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useNavigate, Outlet } from "react-router-dom";
-import { LogOut, Settings, User, Edit, Plus, Search } from "lucide-react";
+import { LogOut, Settings, User, Edit, Plus, Search, Image, MessageSquare, FileText, HelpCircle, Contact, FileBadge } from "lucide-react";
 
 const AdminDashboardPage = () => {
   const { logout } = useAdminAuth();
@@ -47,8 +47,17 @@ const AdminDashboardPage = () => {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton 
-                  onClick={() => navigate("/admin/schemes")}
-                  isActive={location.pathname.includes("/admin/schemes")}
+                  onClick={() => navigate("/admin/dashboard/profile")}
+                  isActive={location.pathname.includes("/admin/dashboard/profile")}
+                >
+                  <User /> 
+                  <span>Profil</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/admin/dashboard/schemes")}
+                  isActive={location.pathname.includes("/admin/dashboard/schemes")}
                 >
                   <Edit /> 
                   <span>Skema Sertifikasi</span>
@@ -56,11 +65,56 @@ const AdminDashboardPage = () => {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton 
-                  onClick={() => navigate("/admin/team")}
-                  isActive={location.pathname.includes("/admin/team")}
+                  onClick={() => navigate("/admin/dashboard/team")}
+                  isActive={location.pathname.includes("/admin/dashboard/team")}
                 >
                   <User /> 
                   <span>Tim & Asesor</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/admin/dashboard/information")}
+                  isActive={location.pathname.includes("/admin/dashboard/information")}
+                >
+                  <FileText /> 
+                  <span>Informasi</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/admin/dashboard/gallery")}
+                  isActive={location.pathname.includes("/admin/dashboard/gallery")}
+                >
+                  <Image /> 
+                  <span>Galeri</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/admin/dashboard/faq")}
+                  isActive={location.pathname.includes("/admin/dashboard/faq")}
+                >
+                  <HelpCircle /> 
+                  <span>FAQ</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/admin/dashboard/contacts")}
+                  isActive={location.pathname.includes("/admin/dashboard/contacts")}
+                >
+                  <MessageSquare /> 
+                  <span>Kontak</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/admin/dashboard/registrations")}
+                  isActive={location.pathname.includes("/admin/dashboard/registrations")}
+                >
+                  <FileBadge /> 
+                  <span>Pendaftaran</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
