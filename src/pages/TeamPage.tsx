@@ -16,7 +16,7 @@ interface TeamMember {
   email: string;
   phone: string;
   linkedin: string;
-  type: "management" | "assessor" | "staff";
+  type: "management" | "assessor" | "komite";
 }
 
 const teamMembers: TeamMember[] = [
@@ -399,42 +399,42 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 30,
-    name: "Diana Puspita",
-    position: "Admin Sertifikasi",
-    image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    education: "S1 Administrasi Bisnis, Universitas Brawijaya",
-    experience: "5+ tahun pengalaman di bidang administrasi",
-    expertise: ["Document Management", "Customer Service", "Administrative Support"],
-    email: "diana.puspita@lspsertifa.id",
-    phone: "+62 818-1234-5678",
-    linkedin: "linkedin.com/in/dianapuspita",
-    type: "staff"
+    name: "Taufan Ramadhan",
+    position: "Ketua Komite Sertifikasi",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    education: "S1 Teknik Informatika",
+    experience: "9+ tahun pengalaman di bidang IT",
+    expertise: ["Software Testing", "Quality Assurance", "Test Automation"],
+    email: "taufan.ramadhan@lspsertifa.id",
+    phone: "+62 821-0000-0014",
+    linkedin: "linkedin.com/in/taufanramadhan",
+    type: "komite"
   },
   {
     id: 31,
-    name: "Andi Firmansyah",
-    position: "IT Support",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    education: "S1 Teknik Informatika, Universitas Indonesia",
-    experience: "3+ tahun pengalaman di bidang IT support",
-    expertise: ["Technical Support", "System Administration", "Network Troubleshooting"],
-    email: "andi.firmansyah@lspsertifa.id",
-    phone: "+62 819-8765-4321",
-    linkedin: "linkedin.com/in/andifirmansyah",
-    type: "staff"
+    name: "Adkhan Soleh",
+    position: "Sekretaris Komite Sertifikasi",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    education: "S1 Sistem Informasi",
+    experience: "9+ tahun pengalaman di bidang IT",
+    expertise: ["Cloud Architecture", "AWS", "Azure"],
+    email: "adkhan.soleh@lspsertifa.id",
+    phone: "+62 821-0000-0025",
+    linkedin: "linkedin.com/in/adkhansoleh",
+    type: "komite"
   },
   {
     id: 32,
-    name: "Putri Rahmadhani",
-    position: "Marketing & Public Relations",
-    image: "https://images.unsplash.com/photo-1571844307880-751c6d86f3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    education: "S1 Komunikasi, Universitas Padjadjaran",
-    experience: "4+ tahun pengalaman di bidang marketing & PR",
-    expertise: ["Digital Marketing", "Public Relations", "Content Creation"],
-    email: "putri.rahmadhani@lspsertifa.id",
-    phone: "+62 822-1234-5678",
-    linkedin: "linkedin.com/in/putrirahmadhani",
-    type: "staff"
+    name: "Rondi Hidayat",
+    position: "Anggota Komite Sertifikasi",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    education: "S2 Teknik Informatika",
+    experience: "10+ tahun pengalaman di bidang IT",
+    expertise: ["Information Security", "Risk Management", "Compliance"],
+    email: "rondi.hidayat@lspsertifa.id",
+    phone: "+62 821-0000-0026",
+    linkedin: "linkedin.com/in/rondihidayat",
+    type: "komite"
   }
 ];
 
@@ -445,7 +445,7 @@ const TeamPage = () => {
 
   const managementMembers = teamMembers.filter(member => member.type === "management");
   const assessorMembers = teamMembers.filter(member => member.type === "assessor");
-  const staffMembers = teamMembers.filter(member => member.type === "staff");
+  const komiteMembers = teamMembers.filter(member => member.type === "komite");
 
   return (
     <>
@@ -464,7 +464,7 @@ const TeamPage = () => {
             <TabsList className="grid grid-cols-3 w-full max-w-md">
               <TabsTrigger value="management">Manajemen</TabsTrigger>
               <TabsTrigger value="assessor">Asesor</TabsTrigger>
-              <TabsTrigger value="staff">Staff</TabsTrigger>
+              <TabsTrigger value="komite">Komite Sertifikasi</TabsTrigger>
             </TabsList>
           </div>
           
@@ -484,9 +484,9 @@ const TeamPage = () => {
             </div>
           </TabsContent>
           
-          <TabsContent value="staff">
+          <TabsContent value="komite">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {staffMembers.map((member) => (
+              {komiteMembers.map((member) => (
                 <TeamMemberCard key={member.id} member={member} />
               ))}
             </div>
