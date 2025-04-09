@@ -25,65 +25,189 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { Edit, Plus, Search, Trash2 } from "lucide-react";
+import { Edit, Eye, Plus, Search, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // More comprehensive mock data for team members, matching frontend structure
 const mockMembers = [
   { 
     id: 1, 
-    name: "Dr. Adi Suryadi", 
-    position: "Ketua LSP", 
+    name: "Dr. Budi Santoso, M.Kom", 
+    position: "Ketua LSP Sertifa", 
     type: "management",
-    email: "adi.suryadi@lspsertifa.id",
-    bio: "Memiliki pengalaman lebih dari 15 tahun di bidang sertifikasi profesi IT.",
+    email: "budi.santoso@lspsertifa.id",
+    bio: "20+ tahun pengalaman di industri teknologi informasi",
+    education: "S3 Ilmu Komputer, Universitas Indonesia",
+    experience: "20+ tahun pengalaman di industri teknologi informasi",
+    expertise: ["IT Governance", "Project Management", "Information Security"],
+    phone: "+62 812-1234-5678",
+    linkedin: "linkedin.com/in/budisantoso",
     imageUrl: "/lovable-uploads/5a069629-da3a-4bd4-8da2-8806dda8fb89.png"
   },
   { 
     id: 2, 
-    name: "Yanuar Hadiyanto", 
-    position: "Asesor Senior", 
-    type: "assessor",
-    email: "yanuar.hadiyanto@lspsertifa.id",
-    bio: "Tersertifikasi sebagai asesor kompetensi nasional dengan spesialisasi di bidang pengembangan web dan mobile.",
-    imageUrl: "/lovable-uploads/1adebbc2-f264-459d-b8c7-d7c4013e30d9.png"
+    name: "Ir. Siti Rahayu, M.T.", 
+    position: "Manajer Sertifikasi", 
+    type: "management",
+    email: "siti.rahayu@lspsertifa.id",
+    bio: "15+ tahun pengalaman di bidang sertifikasi profesi",
+    education: "S2 Teknik Informatika, Institut Teknologi Bandung",
+    experience: "15+ tahun pengalaman di bidang sertifikasi profesi",
+    expertise: ["Assessment Management", "SKKNI Development", "Quality Assurance"],
+    phone: "+62 813-2345-6789",
+    linkedin: "linkedin.com/in/sitirahayu",
+    imageUrl: "/lovable-uploads/3ee1618e-da2a-4db2-9e04-df2760a94ba4.png"
   },
   { 
     id: 3, 
-    name: "Taufan Ramadhan", 
-    position: "Ketua Komite Sertifikasi", 
-    type: "komite",
-    email: "taufan.ramadhan@lspsertifa.id",
-    bio: "Mengawasi dan memastikan kualitas proses sertifikasi sesuai dengan standar nasional.",
+    name: "Hendra Wijaya, M.Sc.", 
+    position: "Manajer Mutu", 
+    type: "management",
+    email: "hendra.wijaya@lspsertifa.id",
+    bio: "12+ tahun pengalaman di bidang QA dan standardisasi",
+    education: "S2 Information Systems, Universitas Gadjah Mada",
+    experience: "12+ tahun pengalaman di bidang QA dan standardisasi",
+    expertise: ["Quality Management", "Standardization", "Audit Systems"],
+    phone: "+62 819-8765-4321",
+    linkedin: "linkedin.com/in/hendrawijaya",
     imageUrl: "/lovable-uploads/8a49d07f-1ab4-40cb-8497-6fb9d96f421a.png"
   },
   { 
     id: 4, 
-    name: "Rini Widyastuti", 
-    position: "Koordinator Asesor", 
-    type: "assessor",
-    email: "rini.widyastuti@lspsertifa.id", 
-    bio: "Spesialis di bidang database management dan cloud computing.",
-    imageUrl: "/lovable-uploads/3ee1618e-da2a-4db2-9e04-df2760a94ba4.png"
-  },
-  { 
-    id: 5, 
-    name: "Budi Santoso", 
-    position: "Sekretaris", 
+    name: "Drs. Ahmad Fauzi, MBA.", 
+    position: "Manajer Kerjasama & Hubungan Industri", 
     type: "management",
-    email: "budi.santoso@lspsertifa.id",
-    bio: "Mengelola administrasi dan dokumentasi sertifikasi.",
+    email: "ahmad.fauzi@lspsertifa.id",
+    bio: "18+ tahun pengalaman di bidang kemitraan strategis",
+    education: "MBA Business Administration, Universitas Indonesia",
+    experience: "18+ tahun pengalaman di bidang kemitraan strategis",
+    expertise: ["Business Development", "Strategic Partnership", "Industry Networking"],
+    phone: "+62 817-5432-1098",
+    linkedin: "linkedin.com/in/ahmadfauzi",
     imageUrl: "/lovable-uploads/3db2bf2d-c336-4acb-961b-85fc47a7617d.png"
   },
   { 
+    id: 5, 
+    name: "Yanuar Hadiyanto", 
+    position: "Asesor IT", 
+    type: "assessor",
+    email: "yanuar.hadiyanto@lspsertifa.id",
+    bio: "10+ tahun pengalaman di bidang IT",
+    education: "S2 Teknologi Informasi",
+    experience: "10+ tahun pengalaman di bidang IT",
+    expertise: ["Cloud Computing", "System Integration", "IT Architecture"],
+    phone: "+62 821-0000-0001",
+    linkedin: "linkedin.com/in/yanuarhadiyanto",
+    imageUrl: "/lovable-uploads/1adebbc2-f264-459d-b8c7-d7c4013e30d9.png"
+  },
+  { 
     id: 6, 
+    name: "Andrian The", 
+    position: "Asesor IT", 
+    type: "assessor",
+    email: "andrian.the@lspsertifa.id",
+    bio: "12+ tahun pengalaman di industri IT",
+    education: "S2 Ilmu Komputer",
+    experience: "12+ tahun pengalaman di industri IT",
+    expertise: ["Data Science", "Machine Learning", "Software Development"],
+    phone: "+62 821-0000-0002",
+    linkedin: "linkedin.com/in/andrianthe",
+    imageUrl: "/lovable-uploads/placeholder.png" 
+  },
+  { 
+    id: 7, 
+    name: "Arindra Saktiawan", 
+    position: "Asesor IT", 
+    type: "assessor",
+    email: "arindra.saktiawan@lspsertifa.id",
+    bio: "8+ tahun pengalaman di bidang IT",
+    education: "S1 Teknik Informatika",
+    experience: "8+ tahun pengalaman di bidang IT",
+    expertise: ["Networking", "Infrastructure", "System Administration"],
+    phone: "+62 821-0000-0003",
+    linkedin: "linkedin.com/in/arindrasaktiawan",
+    imageUrl: "/lovable-uploads/placeholder.png" 
+  },
+  { 
+    id: 8, 
+    name: "Nuzul Fauzan Mustova", 
+    position: "Asesor IT", 
+    type: "assessor",
+    email: "nuzul.fauzan@lspsertifa.id",
+    bio: "7+ tahun pengalaman di bidang IT",
+    education: "S1 Sistem Informasi",
+    experience: "7+ tahun pengalaman di bidang IT",
+    expertise: ["Web Development", "Mobile Development", "UI/UX Design"],
+    phone: "+62 821-0000-0004",
+    linkedin: "linkedin.com/in/nuzulfauzan",
+    imageUrl: "/lovable-uploads/placeholder.png" 
+  },
+  { 
+    id: 9, 
+    name: "Taufan Ramadhan", 
+    position: "Asesor IT", 
+    type: "assessor",
+    email: "taufan.ramadhan@lspsertifa.id",
+    bio: "9+ tahun pengalaman di bidang IT",
+    education: "S1 Teknik Informatika",
+    experience: "9+ tahun pengalaman di bidang IT",
+    expertise: ["Software Testing", "Quality Assurance", "Test Automation"],
+    phone: "+62 821-0000-0014",
+    linkedin: "linkedin.com/in/taufanramadhan",
+    imageUrl: "/lovable-uploads/8a49d07f-1ab4-40cb-8497-6fb9d96f421a.png"
+  },
+  { 
+    id: 10, 
+    name: "Taufan Ramadhan", 
+    position: "Ketua Komite Sertifikasi", 
+    type: "komite",
+    email: "taufan.ramadhan@lspsertifa.id",
+    bio: "9+ tahun pengalaman di bidang IT",
+    education: "S1 Teknik Informatika",
+    experience: "9+ tahun pengalaman di bidang IT",
+    expertise: ["Software Testing", "Quality Assurance", "Test Automation"],
+    phone: "+62 821-0000-0014",
+    linkedin: "linkedin.com/in/taufanramadhan",
+    imageUrl: "/lovable-uploads/8a49d07f-1ab4-40cb-8497-6fb9d96f421a.png"
+  },
+  { 
+    id: 11, 
     name: "Rahma Anindita", 
     position: "Anggota Komite Sertifikasi", 
     type: "komite",
     email: "rahma.anindita@lspsertifa.id",
     bio: "Mengkaji dan mengembangkan standar kompetensi di bidang data science.",
+    education: "S2 Teknik Informatika",
+    experience: "8+ tahun pengalaman di bidang Standarisasi",
+    expertise: ["Data Science Standards", "Curriculum Development", "Assessment Design"],
+    phone: "+62 821-0000-0026",
+    linkedin: "linkedin.com/in/rahmaanindita",
     imageUrl: "/lovable-uploads/8863a0ca-c1e3-4102-a04a-f8bf84ca6787.png"
+  },
+  { 
+    id: 12, 
+    name: "Rondi Hidayat", 
+    position: "Anggota Komite Sertifikasi", 
+    type: "komite",
+    email: "rondi.hidayat@lspsertifa.id",
+    bio: "Mengawasi dan memastikan kualitas proses sertifikasi sesuai dengan standar nasional.",
+    education: "S2 Teknik Informatika",
+    experience: "10+ tahun pengalaman di bidang IT",
+    expertise: ["Information Security", "Risk Management", "Compliance"],
+    phone: "+62 821-0000-0026",
+    linkedin: "linkedin.com/in/rondihidayat",
+    imageUrl: "/lovable-uploads/placeholder.png"
   }
 ];
 
@@ -99,6 +223,11 @@ const TeamManagement = () => {
     type: "management",
     email: "",
     bio: "",
+    education: "",
+    experience: "",
+    expertise: [] as string[],
+    phone: "",
+    linkedin: "",
     imageUrl: "/lovable-uploads/placeholder.png"
   });
   const { toast } = useToast();
@@ -151,6 +280,11 @@ const TeamManagement = () => {
       type: member.type,
       email: member.email,
       bio: member.bio || "",
+      education: member.education || "",
+      experience: member.experience || "",
+      expertise: member.expertise || [],
+      phone: member.phone || "",
+      linkedin: member.linkedin || "",
       imageUrl: member.imageUrl || "/lovable-uploads/placeholder.png"
     });
     setIsAddDialogOpen(true);
@@ -165,6 +299,11 @@ const TeamManagement = () => {
       type: activeTab, 
       email: "",
       bio: "",
+      education: "",
+      experience: "",
+      expertise: [],
+      phone: "",
+      linkedin: "",
       imageUrl: "/lovable-uploads/placeholder.png" 
     });
   };
@@ -238,6 +377,42 @@ const TeamManagement = () => {
                   value={newMember.bio}
                   onChange={(e) => setNewMember({ ...newMember, bio: e.target.value })}
                   placeholder="Masukkan biografi singkat"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="education">Pendidikan</Label>
+                <Input
+                  id="education"
+                  value={newMember.education}
+                  onChange={(e) => setNewMember({ ...newMember, education: e.target.value })}
+                  placeholder="Masukkan pendidikan"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="experience">Pengalaman</Label>
+                <Input
+                  id="experience"
+                  value={newMember.experience}
+                  onChange={(e) => setNewMember({ ...newMember, experience: e.target.value })}
+                  placeholder="Masukkan pengalaman"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Telepon</Label>
+                <Input
+                  id="phone"
+                  value={newMember.phone}
+                  onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
+                  placeholder="Masukkan nomor telepon"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="linkedin">LinkedIn</Label>
+                <Input
+                  id="linkedin"
+                  value={newMember.linkedin}
+                  onChange={(e) => setNewMember({ ...newMember, linkedin: e.target.value })}
+                  placeholder="Masukkan LinkedIn (contoh: linkedin.com/in/username)"
                 />
               </div>
               <div className="space-y-2">
@@ -321,7 +496,7 @@ const MemberTable = ({ members, onEdit, onDelete }: MemberTableProps) => {
             <TableHead>Nama</TableHead>
             <TableHead>Jabatan</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead className="w-[100px]">Aksi</TableHead>
+            <TableHead className="w-[150px]">Aksi</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -352,6 +527,77 @@ const MemberTable = ({ members, onEdit, onDelete }: MemberTableProps) => {
                 <TableCell>{member.email}</TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button 
+                          size="icon" 
+                          variant="ghost" 
+                          className="text-blue-500 hover:text-blue-700"
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        <div className="space-y-4">
+                          <div className="flex justify-center">
+                            <Avatar className="h-24 w-24">
+                              <AvatarImage 
+                                src={member.imageUrl || "/placeholder.svg"} 
+                                alt={member.name} 
+                                className="object-cover"
+                              />
+                              <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                          </div>
+                          <div className="text-center">
+                            <h3 className="text-lg font-bold">{member.name}</h3>
+                            <p className="text-sm text-muted-foreground">{member.position}</p>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="grid grid-cols-[100px_1fr] gap-1">
+                              <span className="text-sm font-medium">Email:</span>
+                              <span className="text-sm">{member.email}</span>
+                            </div>
+                            <div className="grid grid-cols-[100px_1fr] gap-1">
+                              <span className="text-sm font-medium">Pendidikan:</span>
+                              <span className="text-sm">{member.education || "-"}</span>
+                            </div>
+                            <div className="grid grid-cols-[100px_1fr] gap-1">
+                              <span className="text-sm font-medium">Pengalaman:</span>
+                              <span className="text-sm">{member.experience || "-"}</span>
+                            </div>
+                            <div className="grid grid-cols-[100px_1fr] gap-1">
+                              <span className="text-sm font-medium">Telepon:</span>
+                              <span className="text-sm">{member.phone || "-"}</span>
+                            </div>
+                            <div className="grid grid-cols-[100px_1fr] gap-1">
+                              <span className="text-sm font-medium">LinkedIn:</span>
+                              <span className="text-sm">{member.linkedin || "-"}</span>
+                            </div>
+                            <div>
+                              <span className="text-sm font-medium">Biografi:</span>
+                              <p className="text-sm mt-1">{member.bio || "-"}</p>
+                            </div>
+                            {member.expertise && member.expertise.length > 0 && (
+                              <div>
+                                <span className="text-sm font-medium">Keahlian:</span>
+                                <div className="flex flex-wrap gap-1 mt-1">
+                                  {member.expertise.map((skill: string, index: number) => (
+                                    <span 
+                                      key={index} 
+                                      className="text-xs px-2 py-0.5 bg-gray-100 rounded-full"
+                                    >
+                                      {skill}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
                     <Button 
                       size="icon" 
                       variant="ghost" 
