@@ -29,30 +29,62 @@ import { Label } from "@/components/ui/label";
 import { Edit, Plus, Search, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-// Simplified mock data for team members
+// More comprehensive mock data for team members, matching frontend structure
 const mockMembers = [
   { 
     id: 1, 
     name: "Dr. Adi Suryadi", 
     position: "Ketua LSP", 
     type: "management",
-    email: "adi.suryadi@lspsertifa.id"
+    email: "adi.suryadi@lspsertifa.id",
+    bio: "Memiliki pengalaman lebih dari 15 tahun di bidang sertifikasi profesi IT.",
+    imageUrl: "/lovable-uploads/5a069629-da3a-4bd4-8da2-8806dda8fb89.png"
   },
   { 
     id: 2, 
     name: "Yanuar Hadiyanto", 
-    position: "Asesor", 
+    position: "Asesor Senior", 
     type: "assessor",
-    email: "yanuar.hadiyanto@lspsertifa.id"
+    email: "yanuar.hadiyanto@lspsertifa.id",
+    bio: "Tersertifikasi sebagai asesor kompetensi nasional dengan spesialisasi di bidang pengembangan web dan mobile.",
+    imageUrl: "/lovable-uploads/1adebbc2-f264-459d-b8c7-d7c4013e30d9.png"
   },
   { 
     id: 3, 
     name: "Taufan Ramadhan", 
     position: "Ketua Komite Sertifikasi", 
     type: "komite",
-    email: "taufan.ramadhan@lspsertifa.id"
+    email: "taufan.ramadhan@lspsertifa.id",
+    bio: "Mengawasi dan memastikan kualitas proses sertifikasi sesuai dengan standar nasional.",
+    imageUrl: "/lovable-uploads/8a49d07f-1ab4-40cb-8497-6fb9d96f421a.png"
+  },
+  { 
+    id: 4, 
+    name: "Rini Widyastuti", 
+    position: "Koordinator Asesor", 
+    type: "assessor",
+    email: "rini.widyastuti@lspsertifa.id", 
+    bio: "Spesialis di bidang database management dan cloud computing.",
+    imageUrl: "/lovable-uploads/3ee1618e-da2a-4db2-9e04-df2760a94ba4.png"
+  },
+  { 
+    id: 5, 
+    name: "Budi Santoso", 
+    position: "Sekretaris", 
+    type: "management",
+    email: "budi.santoso@lspsertifa.id",
+    bio: "Mengelola administrasi dan dokumentasi sertifikasi.",
+    imageUrl: "/lovable-uploads/3db2bf2d-c336-4acb-961b-85fc47a7617d.png"
+  },
+  { 
+    id: 6, 
+    name: "Rahma Anindita", 
+    position: "Anggota Komite Sertifikasi", 
+    type: "komite",
+    email: "rahma.anindita@lspsertifa.id",
+    bio: "Mengkaji dan mengembangkan standar kompetensi di bidang data science.",
+    imageUrl: "/lovable-uploads/8863a0ca-c1e3-4102-a04a-f8bf84ca6787.png"
   }
-  // ... more members would be here in a real app
 ];
 
 const TeamManagement = () => {
@@ -66,6 +98,8 @@ const TeamManagement = () => {
     position: "",
     type: "management",
     email: "",
+    bio: "",
+    imageUrl: "/lovable-uploads/placeholder.png"
   });
   const { toast } = useToast();
 
@@ -115,7 +149,9 @@ const TeamManagement = () => {
       name: member.name,
       position: member.position,
       type: member.type,
-      email: member.email
+      email: member.email,
+      bio: member.bio || "",
+      imageUrl: member.imageUrl || "/lovable-uploads/placeholder.png"
     });
     setIsAddDialogOpen(true);
   };
@@ -127,7 +163,9 @@ const TeamManagement = () => {
       name: "", 
       position: "", 
       type: activeTab, 
-      email: "" 
+      email: "",
+      bio: "",
+      imageUrl: "/lovable-uploads/placeholder.png" 
     });
   };
 
@@ -191,6 +229,24 @@ const TeamManagement = () => {
                   value={newMember.email} 
                   onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
                   placeholder="Masukkan email" 
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="bio">Biografi</Label>
+                <Input
+                  id="bio"
+                  value={newMember.bio}
+                  onChange={(e) => setNewMember({ ...newMember, bio: e.target.value })}
+                  placeholder="Masukkan biografi singkat"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="imageUrl">URL Foto</Label>
+                <Input
+                  id="imageUrl"
+                  value={newMember.imageUrl}
+                  onChange={(e) => setNewMember({ ...newMember, imageUrl: e.target.value })}
+                  placeholder="Masukkan URL foto"
                 />
               </div>
             </div>
@@ -261,6 +317,7 @@ const MemberTable = ({ members, onEdit, onDelete }: MemberTableProps) => {
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>Foto</TableHead>
             <TableHead>Nama</TableHead>
             <TableHead>Jabatan</TableHead>
             <TableHead>Email</TableHead>
@@ -270,13 +327,26 @@ const MemberTable = ({ members, onEdit, onDelete }: MemberTableProps) => {
         <TableBody>
           {members.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={4} className="text-center h-24">
+              <TableCell colSpan={5} className="text-center h-24">
                 Tidak ada data anggota yang ditemukan
               </TableCell>
             </TableRow>
           ) : (
             members.map((member) => (
               <TableRow key={member.id}>
+                <TableCell>
+                  <div className="h-10 w-10 rounded-full overflow-hidden">
+                    <img 
+                      src={member.imageUrl || "/placeholder.svg"} 
+                      alt={member.name}
+                      className="h-full w-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/placeholder.svg";
+                      }}
+                    />
+                  </div>
+                </TableCell>
                 <TableCell className="font-medium">{member.name}</TableCell>
                 <TableCell>{member.position}</TableCell>
                 <TableCell>{member.email}</TableCell>

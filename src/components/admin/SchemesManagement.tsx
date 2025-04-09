@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -22,17 +22,20 @@ import {
 import { Label } from "@/components/ui/label";
 import { Edit, Plus, Search, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { certificationSchemes } from "@/data/certificationSchemes";
 
-// This is a mocked version of scheme data
-const mockSchemes = [
-  { id: 1, name: "Junior Web Developer", code: "J.620100.009.02", level: "KKNI Level II" },
-  { id: 2, name: "Database Administrator", code: "J.620100.014.02", level: "KKNI Level III" },
-  { id: 3, name: "Network Administrator", code: "J.620100.015.02", level: "KKNI Level III" },
-  { id: 4, name: "Mobile Developer", code: "J.620100.017.02", level: "KKNI Level II" }
-];
+// Transformed data from certification schemes
+const transformSchemesToAdmin = () => {
+  return certificationSchemes.map(scheme => ({
+    id: scheme.id,
+    name: scheme.title,
+    code: scheme.code || `SERTIFA-${scheme.id}`,
+    level: scheme.level || "KKNI Level II"
+  }));
+};
 
 const SchemesManagement = () => {
-  const [schemes, setSchemes] = useState(mockSchemes);
+  const [schemes, setSchemes] = useState(transformSchemesToAdmin());
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingScheme, setEditingScheme] = useState<any>(null);

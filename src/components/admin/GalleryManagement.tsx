@@ -38,6 +38,9 @@ const formSchema = z.object({
   imageUrl: z.string().min(5, { message: "URL gambar harus diisi" }),
   eventDate: z.string().min(2, { message: "Tanggal acara harus diisi" }),
   description: z.string().min(10, { message: "Deskripsi minimal 10 karakter" }),
+  category: z.enum(["certification", "event", "workshop"], { 
+    message: "Kategori harus dipilih" 
+  }),
 });
 
 type GalleryItem = {
@@ -46,23 +49,83 @@ type GalleryItem = {
   imageUrl: string;
   eventDate: string;
   description: string;
+  category: "certification" | "event" | "workshop";
 };
 
+// Mock data matching the frontend GalleryPage
 const initialData: GalleryItem[] = [
   {
     id: "1",
-    title: "Pelantikan Asesor Baru",
+    title: "Sertifikasi Data Analyst Batch 10",
+    eventDate: "2023-05-15",
     imageUrl: "/lovable-uploads/8437655c-eaf6-440c-9b87-f8c4d81dee86.png",
-    eventDate: "2023-08-15",
-    description: "Pelantikan asesor baru untuk skema sertifikasi Junior Web Developer",
+    category: "certification",
+    description: "Pelaksanaan sertifikasi untuk skema Data Analyst batch ke-10",
   },
   {
     id: "2",
-    title: "Seminar Kompetensi Nasional",
+    title: "Seminar Transformasi Digital",
+    eventDate: "2023-04-22",
     imageUrl: "/lovable-uploads/5237ea6b-60c9-4c9f-9d97-f89b25bd7bf4.png",
-    eventDate: "2023-07-20",
-    description: "Seminar nasional tentang pentingnya sertifikasi kompetensi di era digital",
+    category: "event",
+    description: "Seminar tentang transformasi digital untuk industri di era 4.0",
   },
+  {
+    id: "3",
+    title: "Workshop Persiapan Sertifikasi IT Service Manager",
+    eventDate: "2023-03-10",
+    imageUrl: "/lovable-uploads/f4760378-7481-4df1-b7eb-aa02eb9f6039.png",
+    category: "workshop",
+    description: "Workshop persiapan untuk menghadapi sertifikasi IT Service Manager",
+  },
+  {
+    id: "4",
+    title: "Uji Kompetensi Machine Learning Engineer",
+    eventDate: "2023-02-05",
+    imageUrl: "/lovable-uploads/ae245acb-ef35-4248-aa1a-93acd8128f7a.png",
+    category: "certification",
+    description: "Uji kompetensi untuk skema Machine Learning Engineer",
+  },
+  {
+    id: "5",
+    title: "MoU Signing dengan Industri IT",
+    eventDate: "2023-01-20",
+    imageUrl: "/lovable-uploads/3ddcbda0-2e06-4c6e-a73a-32d36dc26aa2.png",
+    category: "event",
+    description: "Penandatanganan MoU dengan berbagai industri IT untuk program kerjasama",
+  },
+  {
+    id: "6",
+    title: "Workshop Cybersecurity Awareness",
+    eventDate: "2022-12-15",
+    imageUrl: "/lovable-uploads/412b768d-9b28-448d-a8b7-c416179ae543.png",
+    category: "workshop",
+    description: "Workshop tentang pentingnya cybersecurity awareness dalam era digital",
+  },
+  {
+    id: "7",
+    title: "Sertifikasi IoT Operator Batch 5",
+    eventDate: "2022-11-28",
+    imageUrl: "/lovable-uploads/9f7375cb-80d4-4599-a6ce-64ad4fa96f48.png",
+    category: "certification",
+    description: "Sertifikasi untuk skema IoT Operator batch kelima",
+  },
+  {
+    id: "8",
+    title: "IT Conference 2022",
+    eventDate: "2022-10-10",
+    imageUrl: "/lovable-uploads/1ba3c4f7-159e-4f9c-92b5-99f286cdafab.png",
+    category: "event",
+    description: "Konferensi tahunan membahas perkembangan terbaru di industri IT",
+  },
+  {
+    id: "9",
+    title: "Workshop Agile Project Management",
+    eventDate: "2022-09-25",
+    imageUrl: "/lovable-uploads/14f7ef81-cf89-4e18-bac3-4f7856dba368.png",
+    category: "workshop",
+    description: "Workshop metodologi Agile untuk manajemen proyek IT",
+  }
 ];
 
 const GalleryManagement = () => {
@@ -78,6 +141,7 @@ const GalleryManagement = () => {
       imageUrl: "",
       eventDate: "",
       description: "",
+      category: "certification",
     },
   });
 
@@ -87,6 +151,7 @@ const GalleryManagement = () => {
       imageUrl: "",
       eventDate: new Date().toISOString().split('T')[0],
       description: "",
+      category: "certification",
     });
     setEditingItem(null);
     setIsDialogOpen(true);
@@ -98,6 +163,7 @@ const GalleryManagement = () => {
       imageUrl: item.imageUrl,
       eventDate: item.eventDate,
       description: item.description,
+      category: item.category,
     });
     setEditingItem(item);
     setIsDialogOpen(true);
@@ -105,13 +171,14 @@ const GalleryManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingItem) {
-      // Fix: ensure all required properties are included when updating
+      // Update existing item
       const updatedItem: GalleryItem = {
         ...editingItem,
         title: values.title,
         imageUrl: values.imageUrl,
         eventDate: values.eventDate,
-        description: values.description
+        description: values.description,
+        category: values.category
       };
       
       setItems(items.map(item => 
@@ -123,13 +190,14 @@ const GalleryManagement = () => {
         description: `${values.title} telah diperbarui`,
       });
     } else {
-      // Fix: ensure all required properties are included when adding
+      // Add new item
       const newItem: GalleryItem = {
         id: Date.now().toString(),
         title: values.title,
         imageUrl: values.imageUrl,
         eventDate: values.eventDate,
-        description: values.description
+        description: values.description,
+        category: values.category
       };
       
       setItems([...items, newItem]);
@@ -169,6 +237,7 @@ const GalleryManagement = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Judul</TableHead>
+              <TableHead>Kategori</TableHead>
               <TableHead>Tanggal Acara</TableHead>
               <TableHead>Gambar</TableHead>
               <TableHead className="w-[150px]">Aksi</TableHead>
@@ -178,13 +247,32 @@ const GalleryManagement = () => {
             {items.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="font-medium">{item.title}</TableCell>
-                <TableCell>{item.eventDate}</TableCell>
+                <TableCell>
+                  <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
+                    item.category === "certification" 
+                      ? "bg-blue-100 text-blue-800" 
+                      : item.category === "event"
+                        ? "bg-purple-100 text-purple-800"
+                        : "bg-green-100 text-green-800"
+                  }`}>
+                    {item.category === "certification" 
+                      ? "Sertifikasi" 
+                      : item.category === "event" 
+                        ? "Event" 
+                        : "Workshop"}
+                  </span>
+                </TableCell>
+                <TableCell>{new Date(item.eventDate).toLocaleDateString('id-ID')}</TableCell>
                 <TableCell>
                   <div className="h-10 w-16 bg-gray-100 rounded">
                     <img 
                       src={item.imageUrl}
                       alt={item.title}
                       className="h-full w-full object-cover rounded"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/placeholder.svg";
+                      }}
                     />
                   </div>
                 </TableCell>
@@ -227,6 +315,27 @@ const GalleryManagement = () => {
                     <FormLabel>Judul</FormLabel>
                     <FormControl>
                       <Input placeholder="Masukkan judul foto" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Kategori</FormLabel>
+                    <FormControl>
+                      <select
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        {...field}
+                      >
+                        <option value="certification">Sertifikasi</option>
+                        <option value="event">Event</option>
+                        <option value="workshop">Workshop</option>
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
