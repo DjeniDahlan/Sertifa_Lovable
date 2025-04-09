@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,9 +19,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { Edit, Plus, Search, Trash2 } from "lucide-react";
+import { Edit, Plus, Search, Trash2, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { certificationSchemes, CertificationScheme } from "@/data/certificationSchemes";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { getSchemeImage } from "@/utils/schemeImageMapping";
 
 // Define interface for the admin view of schemes
 interface AdminSchemeView {
@@ -61,7 +72,6 @@ const SchemesManagement = () => {
 
   const handleAddOrEditScheme = () => {
     if (editingScheme) {
-      // Update existing scheme
       setSchemes(schemes.map(scheme => 
         scheme.id === editingScheme.id ? { ...scheme, ...newScheme } : scheme
       ));
@@ -70,7 +80,6 @@ const SchemesManagement = () => {
         description: `Skema "${newScheme.name}" telah berhasil diperbarui.`,
       });
     } else {
-      // Add new scheme
       const id = Math.max(...schemes.map(scheme => scheme.id), 0) + 1;
       setSchemes([...schemes, { id, ...newScheme }]);
       toast({
@@ -107,6 +116,10 @@ const SchemesManagement = () => {
     setIsAddDialogOpen(false);
     setEditingScheme(null);
     setNewScheme({ name: "", code: "", level: "" });
+  };
+
+  const findOriginalScheme = (id: number): CertificationScheme | undefined => {
+    return certificationSchemes.find(scheme => scheme.id === id);
   };
 
   return (
@@ -185,7 +198,7 @@ const SchemesManagement = () => {
               <TableHead>Nama Skema</TableHead>
               <TableHead>Kode Skema</TableHead>
               <TableHead>Level</TableHead>
-              <TableHead className="w-[100px]">Aksi</TableHead>
+              <TableHead className="w-[120px]">Aksi</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -203,6 +216,57 @@ const SchemesManagement = () => {
                   <TableCell>{scheme.level}</TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <Button 
+                                  size="icon" 
+                                  variant="ghost"
+                                >
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent className="p-0 w-80" side="left">
+                                <div className="overflow-hidden rounded-md">
+                                  {(() => {
+                                    const originalScheme = findOriginalScheme(scheme.id);
+                                    return originalScheme ? (
+                                      <>
+                                        <img 
+                                          src={getSchemeImage(scheme.id)} 
+                                          alt={scheme.name}
+                                          className="w-full h-44 object-cover"
+                                          onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.src = "/placeholder.svg";
+                                          }}
+                                        />
+                                        <div className="p-4 bg-white">
+                                          <h4 className="font-semibold mb-1">{scheme.name}</h4>
+                                          <div className="flex items-center mb-2 gap-2">
+                                            <span className="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full">{scheme.code}</span>
+                                            <span className="text-xs px-2 py-0.5 bg-green-100 text-green-800 rounded-full">{scheme.level}</span>
+                                          </div>
+                                          <p className="text-sm text-gray-600">{originalScheme.description}</p>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <div className="p-4 bg-white">
+                                        <p>Detail tidak tersedia</p>
+                                      </div>
+                                    )
+                                  })()}
+                                </div>
+                              </PopoverContent>
+                            </Popover>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Lihat Preview</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                       <Button 
                         size="icon" 
                         variant="ghost" 
