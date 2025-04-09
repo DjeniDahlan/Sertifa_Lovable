@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,8 +29,19 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Edit, Trash2, Plus } from "lucide-react";
+import { Edit, Trash2, Plus, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const formSchema = z.object({
   title: z.string().min(2, { message: "Judul harus diisi" }),
@@ -52,7 +62,6 @@ type GalleryItem = {
   category: "certification" | "event" | "workshop";
 };
 
-// Mock data matching the frontend GalleryPage
 const initialData: GalleryItem[] = [
   {
     id: "1",
@@ -171,7 +180,6 @@ const GalleryManagement = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (editingItem) {
-      // Update existing item
       const updatedItem: GalleryItem = {
         ...editingItem,
         title: values.title,
@@ -190,7 +198,6 @@ const GalleryManagement = () => {
         description: `${values.title} telah diperbarui`,
       });
     } else {
-      // Add new item
       const newItem: GalleryItem = {
         id: Date.now().toString(),
         title: values.title,
@@ -278,6 +285,39 @@ const GalleryManagement = () => {
                 </TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button variant="ghost" size="sm">
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="p-0" side="bottom">
+                              <div className="overflow-hidden rounded-md">
+                                <img 
+                                  src={item.imageUrl} 
+                                  alt={item.title} 
+                                  className="w-full max-h-[300px] object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = "/placeholder.svg";
+                                  }}
+                                />
+                                <div className="p-3 bg-white">
+                                  <h4 className="font-semibold text-sm">{item.title}</h4>
+                                  <p className="text-xs text-gray-500 mt-1">{item.description}</p>
+                                </div>
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Lihat Preview</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                     <Button variant="ghost" size="sm" onClick={() => openEditDialog(item)}>
                       <Edit className="h-4 w-4" />
                     </Button>
