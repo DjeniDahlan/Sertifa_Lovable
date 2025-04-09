@@ -22,10 +22,18 @@ import {
 import { Label } from "@/components/ui/label";
 import { Edit, Plus, Search, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { certificationSchemes } from "@/data/certificationSchemes";
+import { certificationSchemes, CertificationScheme } from "@/data/certificationSchemes";
+
+// Define interface for the admin view of schemes
+interface AdminSchemeView {
+  id: number;
+  name: string;
+  code: string;
+  level: string;
+}
 
 // Transformed data from certification schemes
-const transformSchemesToAdmin = () => {
+const transformSchemesToAdmin = (): AdminSchemeView[] => {
   return certificationSchemes.map(scheme => ({
     id: scheme.id,
     name: scheme.title,
@@ -35,10 +43,10 @@ const transformSchemesToAdmin = () => {
 };
 
 const SchemesManagement = () => {
-  const [schemes, setSchemes] = useState(transformSchemesToAdmin());
+  const [schemes, setSchemes] = useState<AdminSchemeView[]>(transformSchemesToAdmin());
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [editingScheme, setEditingScheme] = useState<any>(null);
+  const [editingScheme, setEditingScheme] = useState<AdminSchemeView | null>(null);
   const [newScheme, setNewScheme] = useState({
     name: "",
     code: "",
@@ -85,7 +93,7 @@ const SchemesManagement = () => {
     }
   };
 
-  const handleEditSchemeClick = (scheme: any) => {
+  const handleEditSchemeClick = (scheme: AdminSchemeView) => {
     setEditingScheme(scheme);
     setNewScheme({
       name: scheme.name,

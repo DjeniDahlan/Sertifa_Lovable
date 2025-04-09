@@ -7,6 +7,8 @@ export interface CertificationScheme {
   requirements: string[];
   duration: string;
   price: string;
+  code?: string; // Added code property as optional
+  level?: string; // Added level property as optional
 }
 
 export const certificationSchemes: CertificationScheme[] = [
