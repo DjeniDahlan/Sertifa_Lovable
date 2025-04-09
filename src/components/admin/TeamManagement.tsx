@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,63 +38,62 @@ import { Label } from "@/components/ui/label";
 import { Edit, Eye, Plus, Search, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-// More comprehensive mock data for team members, matching frontend structure
 const mockMembers = [
   { 
     id: 1, 
-    name: "Dr. Budi Santoso, M.Kom", 
-    position: "Ketua LSP Sertifa", 
+    name: "Lukman Khoiruddin", 
+    position: "Direktur", 
     type: "management",
-    email: "budi.santoso@lspsertifa.id",
-    bio: "20+ tahun pengalaman di industri teknologi informasi",
-    education: "S3 Ilmu Komputer, Universitas Indonesia",
-    experience: "20+ tahun pengalaman di industri teknologi informasi",
-    expertise: ["IT Governance", "Project Management", "Information Security"],
-    phone: "+62 812-1234-5678",
-    linkedin: "linkedin.com/in/budisantoso",
-    imageUrl: "/lovable-uploads/5a069629-da3a-4bd4-8da2-8806dda8fb89.png"
+    email: "lukman.khoiruddin@lspsertifa.id",
+    bio: "9+ tahun pengalaman di bidang IT",
+    education: "S1 Teknik Informatika",
+    experience: "9+ tahun pengalaman di bidang IT",
+    expertise: ["DevOps", "CI/CD", "Automation"],
+    phone: "+62 821-0000-0009",
+    linkedin: "linkedin.com/in/lukmankhoiruddin",
+    imageUrl: "/lovable-uploads/252bf99e-e07e-4040-b243-41390dab7b75.png"
   },
   { 
     id: 2, 
-    name: "Ir. Siti Rahayu, M.T.", 
+    name: "Djeni Dahlan", 
     position: "Manajer Sertifikasi", 
     type: "management",
-    email: "siti.rahayu@lspsertifa.id",
-    bio: "15+ tahun pengalaman di bidang sertifikasi profesi",
-    education: "S2 Teknik Informatika, Institut Teknologi Bandung",
-    experience: "15+ tahun pengalaman di bidang sertifikasi profesi",
-    expertise: ["Assessment Management", "SKKNI Development", "Quality Assurance"],
-    phone: "+62 813-2345-6789",
-    linkedin: "linkedin.com/in/sitirahayu",
-    imageUrl: "/lovable-uploads/3ee1618e-da2a-4db2-9e04-df2760a94ba4.png"
+    email: "djeni.dahlan@lspsertifa.id",
+    bio: "13+ tahun pengalaman di bidang IT",
+    education: "S2 Teknik Komputer",
+    experience: "13+ tahun pengalaman di bidang IT",
+    expertise: ["IoT", "Embedded Systems", "Hardware Integration"],
+    phone: "+62 821-0000-0010",
+    linkedin: "linkedin.com/in/djenidahlan",
+    imageUrl: "/lovable-uploads/b633abfc-a1a4-4c53-80d9-2b42f5e4a26d.png"
   },
   { 
     id: 3, 
-    name: "Hendra Wijaya, M.Sc.", 
+    name: "Ardiyan Rofiq", 
     position: "Manajer Mutu", 
     type: "management",
-    email: "hendra.wijaya@lspsertifa.id",
-    bio: "12+ tahun pengalaman di bidang QA dan standardisasi",
-    education: "S2 Information Systems, Universitas Gadjah Mada",
-    experience: "12+ tahun pengalaman di bidang QA dan standardisasi",
-    expertise: ["Quality Management", "Standardization", "Audit Systems"],
-    phone: "+62 819-8765-4321",
-    linkedin: "linkedin.com/in/hendrawijaya",
-    imageUrl: "/lovable-uploads/8a49d07f-1ab4-40cb-8497-6fb9d96f421a.png"
+    email: "ardiyan.rofiq@lspsertifa.id",
+    bio: "8+ tahun pengalaman di bidang IT",
+    education: "S1 Sistem Informasi",
+    experience: "8+ tahun pengalaman di bidang IT",
+    expertise: ["Backend Development", "API Design", "Microservices"],
+    phone: "+62 821-0000-0012",
+    linkedin: "linkedin.com/in/ardiyanrofiq",
+    imageUrl: "/lovable-uploads/59056277-c292-41d4-a38c-01208b4ad3b3.png"
   },
   { 
     id: 4, 
-    name: "Drs. Ahmad Fauzi, MBA.", 
-    position: "Manajer Kerjasama & Hubungan Industri", 
+    name: "Anda Kurnianto", 
+    position: "Manajer Administrasi & Keuangan", 
     type: "management",
-    email: "ahmad.fauzi@lspsertifa.id",
-    bio: "18+ tahun pengalaman di bidang kemitraan strategis",
-    education: "MBA Business Administration, Universitas Indonesia",
-    experience: "18+ tahun pengalaman di bidang kemitraan strategis",
-    expertise: ["Business Development", "Strategic Partnership", "Industry Networking"],
-    phone: "+62 817-5432-1098",
-    linkedin: "linkedin.com/in/ahmadfauzi",
-    imageUrl: "/lovable-uploads/3db2bf2d-c336-4acb-961b-85fc47a7617d.png"
+    email: "anda.kurnianto@lspsertifa.id",
+    bio: "7+ tahun pengalaman di bidang IT",
+    education: "S1 Teknik Informatika",
+    experience: "7+ tahun pengalaman di bidang IT",
+    expertise: ["Frontend Development", "UI/UX Design", "Web Accessibility"],
+    phone: "+62 821-0000-0011",
+    linkedin: "linkedin.com/in/andakurnianto",
+    imageUrl: "/lovable-uploads/f19a6c84-551b-4db6-9cd3-42327068d5a2.png"
   },
   { 
     id: 5, 
@@ -240,7 +238,6 @@ const TeamManagement = () => {
 
   const handleAddOrEditMember = () => {
     if (editingMember) {
-      // Update existing member
       setMembers(members.map(member => 
         member.id === editingMember.id ? { ...member, ...newMember } : member
       ));
@@ -249,7 +246,6 @@ const TeamManagement = () => {
         description: `Data "${newMember.name}" telah berhasil diperbarui.`,
       });
     } else {
-      // Add new member
       const id = Math.max(...members.map(member => member.id), 0) + 1;
       setMembers([...members, { id, ...newMember }]);
       toast({
