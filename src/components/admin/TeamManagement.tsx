@@ -177,21 +177,21 @@ const mockMembers = [
     expertise: ["Software Testing", "Quality Assurance", "Test Automation"],
     phone: "+62 821-0000-0014",
     linkedin: "linkedin.com/in/taufanramadhan",
-    imageUrl: "/lovable-uploads/8a49d07f-1ab4-40cb-8497-6fb9d96f421a.png"
+    imageUrl: "/lovable-uploads/e16654f7-c507-4cde-b264-69d673360b9e.png"
   },
   { 
     id: 11, 
-    name: "Rahma Anindita", 
-    position: "Anggota Komite Sertifikasi", 
+    name: "Adkhan Soleh", 
+    position: "Sekretaris Komite Sertifikasi", 
     type: "komite",
-    email: "rahma.anindita@lspsertifa.id",
-    bio: "Mengkaji dan mengembangkan standar kompetensi di bidang data science.",
-    education: "S2 Teknik Informatika",
-    experience: "8+ tahun pengalaman di bidang Standarisasi",
-    expertise: ["Data Science Standards", "Curriculum Development", "Assessment Design"],
-    phone: "+62 821-0000-0026",
-    linkedin: "linkedin.com/in/rahmaanindita",
-    imageUrl: "/lovable-uploads/8863a0ca-c1e3-4102-a04a-f8bf84ca6787.png"
+    email: "adkhan.soleh@lspsertifa.id",
+    bio: "9+ tahun pengalaman di bidang IT",
+    education: "S1 Sistem Informasi",
+    experience: "9+ tahun pengalaman di bidang IT",
+    expertise: ["Cloud Architecture", "AWS", "Azure"],
+    phone: "+62 821-0000-0025",
+    linkedin: "linkedin.com/in/adkhansoleh",
+    imageUrl: "/lovable-uploads/067bd115-ebb1-414e-b0ca-4832093d7ce3.png"
   },
   { 
     id: 12, 
@@ -205,7 +205,7 @@ const mockMembers = [
     expertise: ["Information Security", "Risk Management", "Compliance"],
     phone: "+62 821-0000-0026",
     linkedin: "linkedin.com/in/rondihidayat",
-    imageUrl: "/lovable-uploads/placeholder.png"
+    imageUrl: "/lovable-uploads/21ef9171-ab94-44f3-8f8e-1f3fa9cb35d6.png"
   }
 ];
 
